@@ -50,7 +50,12 @@ router.get('/admin/messages', adminMiddleware, getAllMessages);
 router.post('/admin/showcase', adminMiddleware, addShowcaseProject);
 router.post('/admin/blog', adminMiddleware, createBlogPost);
 router.post('/admin/testimonials', adminMiddleware, addTestimonial);
-
+router.get('/', (req,res)=>{
+res.json({
+success:true,
+message:'ROBAMO API Working'
+});
+});
 // HEALTH
 router.get('/health', (req, res) => res.json({ success: true, message: 'ROBAMO API running 🚀', timestamp: new Date().toISOString() }));
 // Google OAuth routes
