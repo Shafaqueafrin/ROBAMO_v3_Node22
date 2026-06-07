@@ -1,7 +1,7 @@
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? `${window.location.protocol}//${window.location.hostname}:5000/api`
-  : '/api';
-
+  ? 'http://localhost:5000/api'
+  : 'https://robamo-v3-node22-5.onrender.com/api';
+  
 async function apiCall(method, endpoint, body = null, token = null) {
   const headers = { 'Content-Type': 'application/json' };
   if (token) headers['Authorization'] = `Bearer ${token}`;
