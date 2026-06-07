@@ -18,7 +18,7 @@ const Auth = {
   register: (data) => apiCall('POST', '/auth/register', data),
   adminLogin: (email, password) => apiCall('POST', '/auth/admin/login', { email, password }),
   profile: () => apiCall('GET', '/auth/profile', null, getToken()),
-  logout: () => { localStorage.removeItem('robamo_token'); localStorage.removeItem('robamo_user'); window.location.href = '/'; },
+  logout: () => { if (window.firebaseSignOut && window.auth) { window.firebaseSignOut(window.auth).catch(() => {}); } localStorage.removeItem('robamo_token'); localStorage.removeItem('robamo_user'); setTimeout(() => { window.location.href = '/'; }, 200); },
 };
 
 const Courses = {

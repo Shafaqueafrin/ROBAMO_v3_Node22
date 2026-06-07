@@ -441,6 +441,27 @@
   Continue with Google
 </a>
 <div class="divider"><span>OR</span></div>
+<div class="phone-auth">
+
+  <input
+    id="phone"
+    type="tel"
+    placeholder="+91XXXXXXXXXX"
+    style="width:100%;padding:.8rem;margin-bottom:.8rem;"
+  />
+
+  <div id="recaptcha-container"></div>
+
+  <button
+    id="sendOtp"
+    type="button"
+    class="btn-accent"
+    style="width:100%;margin-top:.8rem;"
+  >
+    Send OTP
+  </button>
+
+</div>
     <div style="display:flex;gap:.5rem;margin-bottom:1.5rem;">
       <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">Login</button>
       <button class="tab" id="tabRegister" onclick="switchAuthTab('register')">Register</button>
@@ -691,5 +712,7 @@ if (googleToken && googleUser) {
   window.history.replaceState({}, document.title, '/');
 }
 </script>
+<script type="module" src="./js/firebase.js"></script>
+<script type="module" src="./js/otp.js"></script>
 </body>
 </html>
