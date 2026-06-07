@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ROBAMO — Course Details</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/style.css"/>
+<style>
+.detail-hero{background:var(--dark3);padding:8rem 5% 4rem;position:relative;overflow:hidden;}
+.detail-hero .orb1{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(109,40,217,.35),transparent 70%);top:-150px;left:-80px;border-radius:50%;filter:blur(80px);}
+.detail-hero .orb2{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(245,158,11,.2),transparent 70%);bottom:0;right:5%;border-radius:50%;filter:blur(60px);}
+.detail-hero-inner{position:relative;z-index:2;max-width:900px;}
+.detail-grid{display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:start;padding:4rem 5%;}
+.main-col{}
+.sticky-col{position:sticky;top:90px;}
+.enroll-card{background:rgba(13,1,24,.9);border:1px solid rgba(139,92,246,.25);border-radius:20px;padding:2rem;backdrop-filter:blur(20px);}
+.enroll-card-thumb{width:100%;height:180px;border-radius:12px;margin-bottom:1.5rem;object-fit:cover;}
+.price-row{display:flex;align-items:baseline;gap:.5rem;margin-bottom:1rem;}
+.price-main{font-family:var(--font-head);font-size:2rem;font-weight:800;color:#fff;}
+.price-sub{font-size:.85rem;color:rgba(255,255,255,.45);}
+.enroll-cta{width:100%;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#1C1C2E;border:none;padding:1rem;border-radius:50px;font-family:var(--font-head);font-size:1rem;font-weight:800;cursor:pointer;margin-bottom:.8rem;transition:transform .2s,box-shadow .2s;}
+.enroll-cta:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(245,158,11,.4);}
+.demo-cta{width:100%;background:transparent;color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.2);padding:.8rem;border-radius:50px;font-family:var(--font-head);font-size:.88rem;font-weight:600;cursor:pointer;margin-bottom:1rem;transition:.2s;}
+.demo-cta:hover{border-color:var(--p3);color:#fff;}
+.course-meta-card{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.2rem;}
+.meta-item{background:rgba(255,255,255,.05);border-radius:10px;padding:.7rem;text-align:center;}
+.meta-item .mi-val{font-family:var(--font-head);font-size:1rem;font-weight:700;color:#fff;}
+.meta-item .mi-key{font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.1rem;}
+.section-block{margin-bottom:2.5rem;}
+.section-block h2{font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:2px solid var(--p5);}
+.learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+.learn-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.88rem;color:var(--text);line-height:1.5;}
+.learn-check{color:var(--green);font-size:1rem;flex-shrink:0;margin-top:.1rem;}
+.req-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.88rem;color:var(--muted);margin-bottom:.5rem;line-height:1.5;}
+/* Curriculum accordion */
+.curriculum-list{border:1px solid #e2e8f0;border-radius:var(--radius);overflow:hidden;}
+.module-item{border-bottom:1px solid #f1f5f9;}
+.module-item:last-child{border-bottom:none;}
+.module-header{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;cursor:pointer;background:#fff;transition:background .2s;user-select:none;}
+.module-header:hover{background:#fafbff;}
+.module-header.open{background:var(--p5);}
+.module-num{width:30px;height:30px;background:var(--p5);color:var(--p2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0;}
+.module-header.open .module-num{background:var(--p2);color:#fff;}
+.module-title{font-family:var(--font-head);font-size:.92rem;font-weight:700;flex:1;}
+.module-meta{font-size:.75rem;color:var(--muted);margin-right:.5rem;}
+.module-arrow{transition:transform .3s;color:var(--muted);font-size:.8rem;}
+.module-header.open .module-arrow{transform:rotate(180deg);}
+.module-body{display:none;padding:0 1.4rem 1rem;background:#fafbff;}
+.module-desc{font-size:.85rem;color:var(--muted);margin-bottom.8rem;padding:.6rem 0;line-height:1.6;}
+.lessons-list{list-style:none;margin-top:.4rem;}
+.lesson-item{display:flex;align-items:center;gap:.8rem;padding:.55rem .6rem;border-radius:8px;transition:background .15s;}
+.lesson-item:hover{background:#f0f4ff;}
+.lesson-icon{font-size:1rem;flex-shrink:0;}
+.lesson-title{font-size:.83rem;flex:1;}
+.lesson-type{font-size:.7rem;padding:.15rem .5rem;border-radius:50px;font-weight:600;}
+.lt-video{background:#ede9fe;color:#6d28d9;}
+.lt-project{background:#fef3c7;color:#d97706;}
+.lt-quiz{background:#dcfce7;color:#16a34a;}
+.lesson-dur{font-size:.72rem;color:var(--muted);margin-left:.3rem;}
+.free-tag{font-size:.65rem;background:#dcfce7;color:#16a34a;padding:.1rem .4rem;border-radius:50px;font-weight:700;}
+.progress-steps{display:flex;gap:0;overflow-x:auto;margin-bottom:2rem;padding:.5rem 0;}
+.ps-item{display:flex;flex-direction:column;align-items:center;min-width:70px;}
+.ps-circle{width:36px;height:36px;border-radius:50%;border:2px solid var(--p2);background:var(--p5);color:var(--p2);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;margin-bottom:.3rem;}
+.ps-label{font-size:.65rem;color:var(--muted);text-align:center;}
+.ps-line{flex:1;height:2px;background:var(--p5);margin-top:18px;min-width:20px;}
+/* Instructor */
+.instructor-card{background:var(--p5);border-radius:var(--radius);padding:1.5rem;display:flex;gap:1.2rem;align-items:flex-start;}
+.inst-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--p2),var(--p3));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.inst-name{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:.2rem;}
+.inst-title{font-size:.82rem;color:var(--muted);margin-bottom:.5rem;}
+.inst-desc{font-size:.83rem;color:var(--text);line-height:1.6;}
+@media(max-width:900px){.detail-grid{grid-template-columns:1fr;}.sticky-col{position:static;}.learn-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="../index.html" class="logo">ROB<span>A</span>MO</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html#home">Home</a></li>
+    <li><a href="courses.html" class="active">Courses</a></li>
+    <li><a href="../index.html#schools">Schools</a></li>
+    <li><a href="../index.html#showcase">Showcase</a></li>
+    <li><a href="../index.html#blog">Blog</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn-nav" id="navLogin" onclick="window.location.href='../index.html'">Login</button>
+    <div class="nav-user" id="navUser">
+      <div class="nav-user-avatar" id="navUserAvatar">U</div>
+      <span class="nav-user-name" id="navUserName">User</span>
+    </div>
+    <button class="nav-cta" onclick="window.location.href='../index.html#register'">Enroll Now</button>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div id="heroSection" class="detail-hero">
+  <div class="orb1"></div><div class="orb2"></div>
+  <div class="detail-hero-inner">
+    <div id="heroBadge" class="hero-badge" style="display:inline-flex;margin-bottom:1rem;">📚 Loading...</div>
+    <h1 id="courseTitle" style="font-family:var(--font-head);font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:1rem;max-width:700px;line-height:1.15;">Loading course...</h1>
+    <p id="courseDesc" style="color:rgba(255,255,255,.6);font-size:1rem;line-height:1.7;max-width:600px;margin-bottom:1.5rem;"></p>
+    <div id="heroMeta" style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+      <span id="metaDuration" style="color:rgba(255,255,255,.6);font-size:.88rem;"></span>
+      <span id="metaDifficulty" style="color:rgba(255,255,255,.6);font-size:.88rem;"></span>
+      <span id="metaModules" style="color:rgba(255,255,255,.6);font-size:.88rem;"></span>
+    </div>
+  </div>
+</div>
+
+<div class="detail-grid">
+  <!-- MAIN CONTENT -->
+  <div class="main-col">
+    <!-- What you'll learn -->
+    <div class="section-block">
+      <h2>✅ What You'll Learn</h2>
+      <div class="learn-grid" id="learnGrid">
+        <div class="learn-item"><div class="spinner" style="width:16px;height:16px;border-width:2px;"></div></div>
+      </div>
+    </div>
+
+    <!-- Course Curriculum (Expandable) -->
+    <div class="section-block">
+      <h2>📚 Full Curriculum</h2>
+      <div id="statsBar" style="display:flex;gap:1.5rem;margin-bottom:1.2rem;font-size:.85rem;color:var(--muted);flex-wrap:wrap;"></div>
+      <div class="curriculum-list" id="curriculumList">
+        <div class="module-item">
+          <div class="module-header">
+            <div class="spinner" style="width:16px;height:16px;border-width:2px;"></div>
+            <span style="color:var(--muted);font-size:.85rem;padding:.5rem 0;">Loading curriculum...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Requirements -->
+    <div class="section-block">
+      <h2>📋 Requirements</h2>
+      <div id="requirementsList"></div>
+    </div>
+
+    <!-- Instructor -->
+    <div class="section-block">
+      <h2>👨‍🏫 Your Instructor</h2>
+      <div class="instructor-card">
+        <div class="inst-avatar">🎓</div>
+        <div>
+          <div class="inst-name">ROBAMO Expert Educator</div>
+          <div class="inst-title">IIT/NIT Alumni · 8+ years in AI & Robotics Education</div>
+          <div class="inst-desc">Our instructors are industry veterans and certified educators who combine real-world experience with student-friendly teaching. Every module is designed to maximize hands-on learning and real skill building.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificate -->
+    <div class="section-block">
+      <h2>🏆 Certificate & Recognition</h2>
+      <div style="background:linear-gradient(135deg,var(--p5),#ede9fe);border:2px solid var(--p3);border-radius:var(--radius);padding:2rem;text-align:center;">
+        <div style="font-size:3rem;margin-bottom:1rem;">📜</div>
+        <div style="font-family:var(--font-head);font-size:1.2rem;font-weight:800;color:var(--p1);margin-bottom:.5rem;">ROBAMO Certificate of Completion</div>
+        <div style="font-size:.88rem;color:var(--muted);max-width:400px;margin:0 auto;">Industry-recognized certificate on completing the course. Shareable on LinkedIn, valid for competition entries and college applications.</div>
+      </div>
+    </div>
+
+    <!-- WhatsApp for details -->
+    <div class="section-block">
+      <h2>💬 Koi Bhi Sawaal? WhatsApp Karo!</h2>
+      <div style="background:rgba(37,211,102,.07);border:1px solid rgba(37,211,102,.25);border-radius:var(--radius);padding:1.5rem;">
+        <p style="color:var(--text);font-size:.9rem;line-height:1.7;margin-bottom:1.2rem;">Course fees, schedule, batch timings, ya koi bhi detail jaanni ho — WhatsApp pe instantly reply milti hai!</p>
+        <div style="display:flex;gap:.8rem;flex-wrap:wrap;">
+          <a id="waEnquiry" href="#" target="_blank" class="wa-btn wa-green">💬 Course Details Pucho</a>
+          <a id="waDemoBook" href="#" target="_blank" class="wa-btn wa-green">🎓 Free Demo Book Karo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY ENROLL CARD -->
+  <div class="sticky-col">
+    <div class="enroll-card">
+      <img id="enrollThumb" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=180&fit=crop" class="enroll-card-thumb" alt="Course"/>
+      <div class="price-row">
+        <span class="price-main">Free Demo</span>
+        <span class="price-sub">→ then discuss fees</span>
+      </div>
+      <button class="enroll-cta" onclick="window.location.href='../index.html#register'">Enroll in This Course 🚀</button>
+      <button class="demo-cta" onclick="openWADemo()">📞 Book Free Demo on WhatsApp</button>
+      <div id="enrollCourseMeta" class="course-meta-card"></div>
+      <div style="margin-top:1.2rem;padding:1rem;background:rgba(37,211,102,.07);border:1px solid rgba(37,211,102,.2);border-radius:12px;text-align:center;">
+        <div style="font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:.5rem;">Seedha baat karo</div>
+        <a id="waSideBtn" href="https://wa.me/919876543210" target="_blank" class="wa-btn wa-green" style="width:100%;justify-content:center;">💬 WhatsApp: +91 98765 43210</a>
+      </div>
+      <div style="margin-top:1rem;font-size:.75rem;color:rgba(255,255,255,.35);text-align:center;line-height:1.6;">✅ No advance payment needed<br>✅ Free first class guarantee<br>✅ Flexible schedule available</div>
+    </div>
+  </div>
+</div>
+
+<!-- Related Courses -->
+<section style="background:var(--p5);padding:4rem 5%;">
+  <div style="margin-bottom:2rem;">
+    <div class="section-label">More Courses</div>
+    <h2 class="section-title">You Might Also Like</h2>
+  </div>
+  <div class="courses-grid" id="relatedGrid">
+    <div class="courses-loading"><div class="spinner"></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="../index.html" class="logo">ROB<span>A</span>MO</a><p>India's leading AI & Robotics Education Platform.</p></div>
+    <div class="footer-col"><h5>Programs</h5><a href="courses.html">All Courses</a><a href="../index.html#schools">Schools</a></div>
+    <div class="footer-col"><h5>Company</h5><a href="#">About</a><a href="../index.html#contact">Contact</a></div>
+    <div class="footer-col"><h5>Quick</h5><a href="../index.html#register">Enroll Now</a><a href="../index.html#demo">Book Demo</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 ROBAMO Technologies Pvt. Ltd.</p><p>hello@robamo.in</p></div>
+</footer>
+
+<a href="https://wa.me/919876543210?text=Hi%20ROBAMO!%20I%20want%20to%20know%20more." target="_blank" class="float-whatsapp" title="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div class="toast" id="globalToast"></div>
+
+<script src="../js/api.js"></script>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').style.background=window.scrollY>60?'rgba(13,1,24,.98)':'rgba(13,1,24,.92)';});
+function toggleMenu(){const l=document.getElementById('navLinks');l.style.display=l.style.display==='flex'?'none':'flex';if(l.style.display==='flex'){l.style.cssText='display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(13,1,24,.98);padding:1.5rem 5%;gap:1.2rem;border-bottom:1px solid rgba(139,92,246,.15);z-index:999;';}}
+
+const thumbMap={'Grade 1-5':'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=180&fit=crop','Grade 6-8':'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=180&fit=crop','Grade 9-12':'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=180&fit=crop','Advanced':'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=180&fit=crop'};
+
+function openWADemo(){
+  const title=document.getElementById('courseTitle').textContent;
+  window.open(`https://wa.me/919876543210?text=Hi%20ROBAMO!%20Mujhe%20${encodeURIComponent(title)}%20ka%20free%20demo%20book%20karna%20hai.`,'_blank');
+}
+
+async function loadCourse(){
+  const params=new URLSearchParams(window.location.search);
+  const id=params.get('id');
+  if(!id){document.getElementById('courseTitle').textContent='Course not found';return;}
+  try{
+    const data=await Courses.getById(id);
+    const c=data.course;
+    const mods=data.modules||[];
+    document.title=`ROBAMO — ${c.title}`;
+    document.getElementById('heroBadge').textContent=`${c.emoji} ${c.grade_level}`;
+    document.getElementById('courseTitle').textContent=c.title;
+    document.getElementById('courseDesc').textContent=c.description||'';
+    document.getElementById('metaDuration').textContent=`⏱ ${c.duration_hours} Hours`;
+    document.getElementById('metaDifficulty').textContent=`🎯 ${c.difficulty}`;
+    document.getElementById('metaModules').textContent=`📚 ${c.modules} Modules`;
+    document.getElementById('enrollThumb').src=thumbMap[c.grade_level]||thumbMap['Grade 6-8'];
+
+    // WA links
+    const waMsg=encodeURIComponent(`Hi ROBAMO! I am interested in "${c.title}" course. Please share details.`);
+    document.getElementById('waEnquiry').href=`https://wa.me/919876543210?text=${waMsg}`;
+    document.getElementById('waDemoBook').href=`https://wa.me/919876543210?text=Hi%20ROBAMO!%20Mujhe%20${encodeURIComponent(c.title)}%20ka%20free%20demo%20book%20karna%20hai.`;
+    document.getElementById('waSideBtn').href=`https://wa.me/919876543210?text=${waMsg}`;
+
+    // Enroll card meta
+    document.getElementById('enrollCourseMeta').innerHTML=`
+      <div class="meta-item"><div class="mi-val">${c.duration_hours}h</div><div class="mi-key">Total Hours</div></div>
+      <div class="meta-item"><div class="mi-val">${c.modules}</div><div class="mi-key">Modules</div></div>
+      <div class="meta-item"><div class="mi-val">${data.totalLessons||'--'}</div><div class="mi-key">Lessons</div></div>
+      <div class="meta-item"><div class="mi-val">${c.difficulty}</div><div class="mi-key">Level</div></div>`;
+
+    // Stats bar
+    document.getElementById('statsBar').innerHTML=`<span>📦 ${mods.length} Modules</span><span>🎥 ${data.totalLessons||0} Lessons</span><span>🆓 ${data.freeLessons||0} Free Lessons</span>`;
+
+    // What you'll learn
+    const learns=(c.what_you_learn||'').split('|').filter(Boolean);
+    document.getElementById('learnGrid').innerHTML=learns.map(l=>`<div class="learn-item"><span class="learn-check">✅</span><span>${l.trim()}</span></div>`).join('')||'<p style="color:var(--muted)">Details coming soon.</p>';
+
+    // Requirements
+    const reqs=(c.requirements||'').split('|').filter(Boolean);
+    document.getElementById('requirementsList').innerHTML=reqs.map(r=>`<div class="req-item"><span style="color:var(--acc);flex-shrink:0;">▶</span><span>${r.trim()}</span></div>`).join('')||'<p style="color:var(--muted)">Open to all students.</p>';
+
+    // Curriculum accordion
+    if(mods.length===0){
+      document.getElementById('curriculumList').innerHTML='<div style="padding:1.5rem;color:var(--muted);text-align:center;">Curriculum details coming soon.</div>';
+    }else{
+      document.getElementById('curriculumList').innerHTML=mods.map((m,i)=>{
+        const lessons=m.lessons||[];
+        const lessonHtml=lessons.length?lessons.map(l=>{
+          const typeClass={'video':'lt-video','project':'lt-project','quiz':'lt-quiz'}[l.lesson_type]||'lt-video';
+          const typeEmoji={'video':'🎥','project':'🔧','quiz':'📝'}[l.lesson_type]||'🎥';
+          return `<li class="lesson-item">
+            <span class="lesson-icon">${typeEmoji}</span>
+            <span class="lesson-title">${l.title}</span>
+            ${l.is_free?'<span class="free-tag">FREE</span>':''}
+            <span class="lesson-type ${typeClass}">${l.lesson_type}</span>
+            <span class="lesson-dur">${l.duration_minutes}m</span>
+          </li>`;
+        }).join(''):'<li style="padding:.5rem 0;color:var(--muted);font-size:.83rem;">Lessons coming soon.</li>';
+        return `<div class="module-item">
+          <div class="module-header" onclick="toggleModule(this)">
+            <div class="module-num">${m.module_number}</div>
+            <div style="flex:1;"><div class="module-title">${m.title}</div><div style="font-size:.75rem;color:var(--muted);margin-top:.2rem;">${m.description||''}</div></div>
+            <span class="module-meta">${lessons.length} lessons · ${m.duration_hours}h</span>
+            <span class="module-arrow">▼</span>
+          </div>
+          <div class="module-body">
+            <ul class="lessons-list">${lessonHtml}</ul>
+          </div>
+        </div>`;
+      }).join('');
+      // Auto-open first module
+      const firstHeader=document.querySelector('.module-header');
+      if(firstHeader)toggleModule(firstHeader);
+    }
+
+    loadRelated(c.grade_level,c.id);
+  }catch(err){
+    document.getElementById('courseTitle').textContent='Course not found';
+    document.getElementById('courseDesc').textContent='Backend se data load nahi hua. Please backend start karo.';
+  }
+}
+
+function toggleModule(header){
+  const body=header.nextElementSibling;
+  const isOpen=header.classList.contains('open');
+  document.querySelectorAll('.module-header.open').forEach(h=>{h.classList.remove('open');h.nextElementSibling.style.display='none';});
+  if(!isOpen){header.classList.add('open');body.style.display='block';}
+}
+
+async function loadRelated(grade,currentId){
+  try{
+    const data=await Courses.getAll(grade);
+    const related=data.courses.filter(c=>c.id!=currentId).slice(0,3);
+    const thumbMap2={'Grade 1-5':'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=180&fit=crop','Grade 6-8':'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=180&fit=crop','Grade 9-12':'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=180&fit=crop','Advanced':'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=180&fit=crop'};
+    document.getElementById('relatedGrid').innerHTML=related.length?related.map(c=>`
+      <div class="course-card">
+        <div class="course-thumb-img"><img src="${thumbMap2[c.grade_level]||thumbMap2['Grade 6-8']}" alt="${c.title}" loading="lazy"/><div class="course-thumb-overlay ${c.color_class}">${c.emoji}</div></div>
+        <div class="course-body">
+          <span class="course-tag">${c.grade_level}</span>
+          <h3 class="course-title">${c.title}</h3>
+          <div class="course-meta"><span>⏱ ${c.duration_hours}h</span><span>🎯 ${c.difficulty}</span></div>
+          <button class="enroll-btn" style="width:100%;" onclick="window.location.href='course-detail.html?id=${c.id}'">View Details →</button>
+        </div>
+      </div>`).join(''):'<p style="color:var(--muted)">No related courses found.</p>';
+  }catch(e){}
+}
+
+// Nav
+const user=getUser();
+if(user){document.getElementById('navLogin').style.display='none';document.getElementById('navUser').style.display='flex';document.getElementById('navUserName').textContent=user.name.split(' ')[0];document.getElementById('navUserAvatar').textContent=user.name[0].toUpperCase();}
+
+document.addEventListener('DOMContentLoaded',loadCourse);
+</script>
+</body>
+</html>

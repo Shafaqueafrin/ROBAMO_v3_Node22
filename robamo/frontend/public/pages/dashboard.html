@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ROBAMO — My Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--p1:#3B0764;--p2:#6D28D9;--p3:#8B5CF6;--p4:#C4B5FD;--p5:#EDE9FE;--acc:#F59E0B;--dark:#0D0118;--dark2:#1A0533;--text:#1C1C2E;--muted:#64748B;--white:#fff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:#f1f5f9;color:var(--text);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;background:rgba(13,1,24,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(139,92,246,.15);display:flex;align-items:center;justify-content:space-between;padding:0 5%;}
+.logo{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-1px;}
+.logo span{color:var(--acc);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.nav-user-name{color:rgba(255,255,255,.7);font-size:.88rem;}
+.btn-logout{background:none;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);padding:.4rem 1rem;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.83rem;cursor:pointer;transition:.2s;}
+.btn-logout:hover{border-color:#f87171;color:#f87171;}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh;padding-top:64px;}
+.sidebar{background:var(--dark2);padding:2rem 0;border-right:1px solid rgba(139,92,246,.12);position:sticky;top:64px;height:calc(100vh - 64px);}
+.nav-item{display:flex;align-items:center;gap:.8rem;padding:.75rem 1.5rem;color:rgba(255,255,255,.5);font-size:.88rem;cursor:pointer;border-left:3px solid transparent;transition:.2s;}
+.nav-item:hover,.nav-item.active{color:#fff;background:rgba(139,92,246,.12);border-left-color:var(--p3);}
+.main{padding:2rem;}
+.welcome-banner{background:linear-gradient(135deg,var(--p1),var(--p2));border-radius:20px;padding:2rem;color:#fff;margin-bottom:2rem;position:relative;overflow:hidden;}
+.welcome-banner::after{content:'🤖';position:absolute;right:2rem;bottom:-10px;font-size:5rem;opacity:.2;}
+.welcome-banner h1{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:.4rem;}
+.welcome-banner p{color:rgba(255,255,255,.7);font-size:.93rem;}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem;}
+.stat-box{background:#fff;border-radius:14px;padding:1.3rem;border:1px solid #e2e8f0;text-align:center;}
+.stat-box .num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--p2);}
+.stat-box .lbl{font-size:.78rem;color:var(--muted);margin-top:.2rem;}
+.card{background:#fff;border-radius:16px;border:1px solid #e2e8f0;padding:1.5rem;margin-bottom:1.5rem;}
+.card h2{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.2rem;color:var(--text);}
+.course-item{display:flex;align-items:center;gap:1rem;padding:.9rem;background:#f8f5ff;border-radius:12px;margin-bottom:.7rem;border:1px solid rgba(109,40,217,.08);}
+.course-thumb-sm{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.course-thumb-sm.purple{background:linear-gradient(135deg,var(--p1),var(--p2));}
+.course-thumb-sm.amber{background:linear-gradient(135deg,#92400E,#D97706);}
+.course-thumb-sm.teal{background:linear-gradient(135deg,#0F4C81,#0EA5E9);}
+.course-info h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;}
+.course-info p{font-size:.78rem;color:var(--muted);}
+.progress-bar{height:6px;background:#e2e8f0;border-radius:3px;margin-top:.5rem;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--p2),var(--p3));border-radius:3px;}
+.pill{font-size:.72rem;padding:.25rem .7rem;border-radius:50px;font-weight:600;margin-left:auto;flex-shrink:0;}
+.pill.enrolled{background:var(--p5);color:var(--p2);}
+.pill.completed{background:#f0fdf4;color:#16a34a;}
+.activity-item{display:flex;gap:.8rem;padding:.7rem 0;border-bottom:1px solid #f1f5f9;align-items:flex-start;}
+.activity-item:last-child{border-bottom:none;}
+.activity-icon{width:34px;height:34px;border-radius:8px;background:var(--p5);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.activity-text{font-size:.85rem;color:var(--text);}
+.activity-time{font-size:.75rem;color:var(--muted);margin-top:.2rem;}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.profile-field label{font-size:.78rem;color:var(--muted);font-weight:500;}
+.profile-field p{font-size:.92rem;color:var(--text);margin-top:.2rem;font-weight:500;}
+.empty-state{text-align:center;padding:3rem;color:var(--muted);}
+.empty-state .emoji{font-size:2.5rem;margin-bottom:.8rem;}
+.btn-enroll{background:linear-gradient(135deg,var(--p2),var(--p3));color:#fff;border:none;padding:.6rem 1.4rem;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block;margin-top:1rem;}
+.btn-enroll:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(109,40,217,.35);}
+.pane{display:none;}
+.pane.active{display:block;}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(109,40,217,.2);border-top-color:var(--p2);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.toast{position:fixed;bottom:2rem;right:2rem;background:linear-gradient(135deg,var(--p2),var(--p3));color:#fff;padding:1rem 1.5rem;border-radius:14px;font-size:.9rem;z-index:9999;opacity:0;transform:translateY(20px);transition:.4s;max-width:300px;box-shadow:0 8px 30px rgba(0,0,0,.25);}
+.toast.show{opacity:1;transform:translateY(0);}
+@media(max-width:768px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.profile-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="logo">ROB<span>A</span>MO</a>
+  <div class="nav-right">
+    <span class="nav-user-name" id="navName">Loading...</span>
+    <button class="btn-logout" onclick="doLogout()">Logout</button>
+  </div>
+</nav>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="nav-item active" onclick="showPane('overview', this)">📊 Overview</div>
+    <div class="nav-item" onclick="showPane('courses', this)">📚 My Courses</div>
+    <div class="nav-item" onclick="showPane('profile', this)">👤 Profile</div>
+    <div class="nav-item" onclick="showPane('activity', this)">🔔 Activity</div>
+    <div class="nav-item" style="margin-top:auto;" onclick="window.location.href='../index.html'">🏠 Back to Site</div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- OVERVIEW -->
+    <div class="pane active" id="pane-overview">
+      <div class="welcome-banner">
+        <h1>Welcome back, <span id="heroName">Student</span>! 👋</h1>
+        <p>Continue your AI & Robotics journey. You're doing great!</p>
+      </div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="num">3</div><div class="lbl">Courses Enrolled</div></div>
+        <div class="stat-box"><div class="num">1</div><div class="lbl">Completed</div></div>
+        <div class="stat-box"><div class="num">48h</div><div class="lbl">Learning Hours</div></div>
+        <div class="stat-box"><div class="num">2</div><div class="lbl">Certificates</div></div>
+      </div>
+      <div class="card">
+        <h2>📚 Continue Learning</h2>
+        <div class="course-item">
+          <div class="course-thumb-sm purple">🤖</div>
+          <div class="course-info" style="flex:1">
+            <h4>AI Foundations</h4>
+            <p>Module 8 of 12 · 48 hours</p>
+            <div class="progress-bar"><div class="progress-fill" style="width:66%"></div></div>
+          </div>
+          <span class="pill enrolled">In Progress</span>
+        </div>
+        <div class="course-item">
+          <div class="course-thumb-sm teal">🧠</div>
+          <div class="course-info" style="flex:1">
+            <h4>Machine Learning Basics</h4>
+            <p>Module 3 of 8 · 32 hours</p>
+            <div class="progress-bar"><div class="progress-fill" style="width:37%"></div></div>
+          </div>
+          <span class="pill enrolled">In Progress</span>
+        </div>
+        <div class="course-item">
+          <div class="course-thumb-sm amber">🧩</div>
+          <div class="course-info" style="flex:1">
+            <h4>Scratch & Code</h4>
+            <p>Module 6 of 6 · 20 hours</p>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+          </div>
+          <span class="pill completed">✅ Done</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MY COURSES -->
+    <div class="pane" id="pane-courses">
+      <div class="card">
+        <h2>📚 My Enrolled Courses</h2>
+        <div class="course-item">
+          <div class="course-thumb-sm purple">🤖</div>
+          <div class="course-info" style="flex:1">
+            <h4>AI Foundations — Grade 6-8</h4>
+            <p>12 Modules · 48 Hours · Intermediate</p>
+            <div class="progress-bar" style="margin-top:.5rem"><div class="progress-fill" style="width:66%"></div></div>
+            <p style="font-size:.72rem;color:var(--p2);margin-top:.3rem;">66% complete</p>
+          </div>
+          <span class="pill enrolled">Active</span>
+        </div>
+        <div class="course-item">
+          <div class="course-thumb-sm teal">🧠</div>
+          <div class="course-info" style="flex:1">
+            <h4>Machine Learning Basics</h4>
+            <p>8 Modules · 32 Hours · Expert</p>
+            <div class="progress-bar" style="margin-top:.5rem"><div class="progress-fill" style="width:37%"></div></div>
+            <p style="font-size:.72rem;color:var(--p2);margin-top:.3rem;">37% complete</p>
+          </div>
+          <span class="pill enrolled">Active</span>
+        </div>
+        <div class="course-item">
+          <div class="course-thumb-sm amber">🧩</div>
+          <div class="course-info" style="flex:1">
+            <h4>Scratch & Code</h4>
+            <p>6 Modules · 20 Hours · Beginner</p>
+            <div class="progress-bar" style="margin-top:.5rem"><div class="progress-fill" style="width:100%"></div></div>
+            <p style="font-size:.72rem;color:#16a34a;margin-top:.3rem;">Completed! 🎉</p>
+          </div>
+          <span class="pill completed">Done</span>
+        </div>
+        <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid #f1f5f9;text-align:center;">
+          <p style="color:var(--muted);font-size:.9rem;">Want to enroll in more courses?</p>
+          <a href="../index.html#courses" class="btn-enroll">Browse All Courses →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="pane" id="pane-profile">
+      <div class="card">
+        <h2>👤 My Profile</h2>
+        <div id="profileContent">
+          <div style="text-align:center;padding:2rem;"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY -->
+    <div class="pane" id="pane-activity">
+      <div class="card">
+        <h2>🔔 Recent Activity</h2>
+        <div class="activity-item">
+          <div class="activity-icon">📝</div>
+          <div><div class="activity-text">Completed Module 8 — Neural Networks in AI Foundations</div><div class="activity-time">2 hours ago</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">🏆</div>
+          <div><div class="activity-text">Earned certificate for Scratch & Code course</div><div class="activity-time">Yesterday</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">📚</div>
+          <div><div class="activity-text">Started Machine Learning Basics — Module 3</div><div class="activity-time">2 days ago</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">🤖</div>
+          <div><div class="activity-text">Submitted project: Line Following Robot</div><div class="activity-time">4 days ago</div></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">🎓</div>
+          <div><div class="activity-text">Registered for ROBAMO Robotics Olympiad 2025</div><div class="activity-time">1 week ago</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/api.js"></script>
+<script>
+// Redirect if not logged in
+const token = localStorage.getItem('robamo_token');
+if (!token) { window.location.href = '../index.html'; }
+
+function showPane(name, el) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('pane-' + name).classList.add('active');
+  if (el) el.classList.add('active');
+  if (name === 'profile') loadProfile();
+}
+
+function doLogout() {
+  localStorage.removeItem('robamo_token');
+  localStorage.removeItem('robamo_user');
+  window.location.href = '../index.html';
+}
+
+async function loadProfile() {
+  try {
+    const data = await Auth.getProfile();
+    const u = data.user;
+    document.getElementById('profileContent').innerHTML = `
+      <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid #f1f5f9;">
+        <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--p2),var(--p3));display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;font-family:'Syne',sans-serif;font-weight:800;">${u.name[0].toUpperCase()}</div>
+        <div><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;">${u.name}</div><div style="color:var(--muted);font-size:.85rem;">${u.email}</div></div>
+      </div>
+      <div class="profile-grid">
+        <div class="profile-field"><label>Full Name</label><p>${u.name}</p></div>
+        <div class="profile-field"><label>Email</label><p>${u.email}</p></div>
+        <div class="profile-field"><label>Phone</label><p>${u.phone || 'Not provided'}</p></div>
+        <div class="profile-field"><label>City</label><p>${u.city || 'Not provided'}</p></div>
+        <div class="profile-field"><label>School</label><p>${u.school_name || 'Not provided'}</p></div>
+        <div class="profile-field"><label>Member Since</label><p>${new Date(u.created_at).toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'})}</p></div>
+      </div>`;
+  } catch (e) {
+    document.getElementById('profileContent').innerHTML = '<p style="color:var(--muted)">Could not load profile.</p>';
+  }
+}
+
+// Load user name
+const user = JSON.parse(localStorage.getItem('robamo_user') || '{}');
+if (user.name) {
+  document.getElementById('navName').textContent = user.name;
+  document.getElementById('heroName').textContent = user.name.split(' ')[0];
+}
+</script>
+</body>
+</html>

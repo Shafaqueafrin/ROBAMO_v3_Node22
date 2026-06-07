@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ROBAMO — All Courses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/style.css"/>
+<style>
+.courses-page-hero{background:var(--dark);padding:8rem 5% 4rem;text-align:center;position:relative;overflow:hidden;}
+.courses-page-hero .orb1{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(109,40,217,.35),transparent 70%);top:-100px;left:-50px;border-radius:50%;filter:blur(60px);}
+.courses-page-hero .orb2{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(245,158,11,.2),transparent 70%);bottom:-50px;right:0;border-radius:50%;filter:blur(60px);}
+.filter-bar{background:#fff;border-bottom:1px solid #e2e8f0;padding:1rem 5%;display:flex;gap:.6rem;flex-wrap:wrap;position:sticky;top:72px;z-index:50;}
+.courses-body{padding:3rem 5%;background:var(--p5);min-height:60vh;}
+.courses-count{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem;}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="../index.html" class="logo">ROB<span>A</span>MO</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="courses.html" class="active">Courses</a></li>
+    <li><a href="../index.html#schools">Schools</a></li>
+    <li><a href="../index.html#showcase">Showcase</a></li>
+    <li><a href="../index.html#blog">Blog</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn-nav" id="navLogin" onclick="window.location.href='../index.html'">Login</button>
+    <div class="nav-user" id="navUser">
+      <div class="nav-user-avatar" id="navUserAvatar">U</div>
+      <span class="nav-user-name" id="navUserName">User</span>
+      <button class="btn-nav" onclick="window.location.href='dashboard.html'">Dashboard</button>
+    </div>
+    <button class="nav-cta" onclick="window.location.href='../index.html#register'">Enroll Now</button>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="courses-page-hero">
+  <div class="orb1"></div><div class="orb2"></div>
+  <div style="position:relative;z-index:2;">
+    <div class="hero-badge" style="display:inline-flex;margin-bottom:1rem;">📚 Grade 1–12 Programs</div>
+    <h1 style="font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:1rem;">Explore All Courses</h1>
+    <p style="color:rgba(255,255,255,.6);font-size:1rem;max-width:500px;margin:0 auto;">Hands-on AI & Robotics programs designed by IIT/NIT alumni for every grade.</p>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <button class="tab active" onclick="filterCourses('all',this)">All Courses</button>
+  <button class="tab" onclick="filterCourses('Grade 1-5',this)">Grade 1-5</button>
+  <button class="tab" onclick="filterCourses('Grade 6-8',this)">Grade 6-8</button>
+  <button class="tab" onclick="filterCourses('Grade 9-12',this)">Grade 9-12</button>
+  <button class="tab" onclick="filterCourses('Advanced',this)">Advanced</button>
+</div>
+
+<div class="courses-body">
+  <div class="courses-count" id="coursesCount">Loading courses...</div>
+  <div class="courses-grid" id="coursesGrid">
+    <div style="text-align:center;padding:3rem;"><div class="spinner" style="width:28px;height:28px;border:3px solid rgba(109,40,217,.2);border-top-color:var(--p2);"></div></div>
+  </div>
+</div>
+
+<footer style="background:var(--dark);border-top:1px solid rgba(139,92,246,.12);padding:2rem 5%;text-align:center;">
+  <a href="../index.html" class="logo" style="font-size:1.3rem;">ROB<span>A</span>MO</a>
+  <p style="color:rgba(255,255,255,.25);font-size:.8rem;margin-top:1rem;">© 2025 ROBAMO Technologies Pvt. Ltd. All rights reserved.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/api.js"></script>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').style.background=window.scrollY>60?'rgba(13,1,24,.98)':'rgba(13,1,24,.92)';});
+function toggleMenu(){const l=document.getElementById('navLinks');l.style.display=l.style.display==='flex'?'none':'flex';if(l.style.display==='flex'){l.style.cssText='display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(13,1,24,.98);padding:1.5rem 5%;gap:1.2rem;border-bottom:1px solid rgba(139,92,246,.15);z-index:999;';}}
+
+let allCourses=[];
+async function loadCourses(){
+  try{
+    const data=await Courses.getAll();
+    allCourses=data.courses;
+    renderCourses(allCourses);
+  }catch(e){
+    document.getElementById('coursesGrid').innerHTML='<p style="color:var(--muted);text-align:center;padding:3rem;">Backend connect nahi hua. Please run: <code>cd backend && npm run dev</code></p>';
+  }
+}
+
+function renderCourses(list){
+  document.getElementById('coursesCount').textContent=list.length+' courses found';
+  if(!list.length){document.getElementById('coursesGrid').innerHTML='<p style="color:var(--muted);text-align:center;padding:2rem;">No courses found.</p>';return;}
+  document.getElementById('coursesGrid').innerHTML=list.map(c=>`
+    <div class="course-card">
+      <div class="course-thumb ${c.color_class}">${c.emoji}</div>
+      <div class="course-body">
+        <span class="course-tag">${c.grade_level}</span>
+        <h3 class="course-title">${c.title}</h3>
+        <p style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem;line-height:1.5;">${c.description||''}</p>
+        <div class="course-meta"><span>⏱ ${c.duration_hours}h</span><span>🎯 ${c.difficulty}</span><span>📚 ${c.modules} Modules</span></div>
+        <div style="display:flex;gap:.5rem;">
+          <button class="enroll-btn" style="flex:1;" onclick="window.location.href='course-detail.html?id=${c.id}'">View Details</button>
+          <button class="enroll-btn" style="flex:1;background:linear-gradient(135deg,#F59E0B,#FCD34D);color:#1C1C2E;" onclick="window.location.href='../index.html#register'">Enroll →</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function filterCourses(grade,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderCourses(grade==='all'?allCourses:allCourses.filter(c=>c.grade_level===grade));
+}
+
+// Nav update
+const user=JSON.parse(localStorage.getItem('robamo_user')||'{}');
+if(user.name){document.getElementById('navLogin').style.display='none';document.getElementById('navUser').style.display='flex';document.getElementById('navUserName').textContent=user.name.split(' ')[0];document.getElementById('navUserAvatar').textContent=user.name[0].toUpperCase();}
+
+document.addEventListener('DOMContentLoaded',loadCourses);
+</script>
+</body>
+</html>

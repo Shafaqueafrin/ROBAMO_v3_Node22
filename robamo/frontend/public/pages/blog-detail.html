@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ROBAMO Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/style.css"/>
+<style>
+.blog-hero{background:var(--dark3);padding:8rem 5% 4rem;position:relative;overflow:hidden;}
+.blog-hero .orb1{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(109,40,217,.3),transparent 70%);top:-100px;left:-50px;border-radius:50%;filter:blur(70px);}
+.blog-layout{display:grid;grid-template-columns:1fr 320px;gap:3rem;padding:4rem 5%;max-width:1100px;margin:0 auto;}
+.blog-article{}
+.blog-article h1{font-family:var(--font-head);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:var(--text);margin-bottom:1.2rem;line-height:1.2;letter-spacing:-1px;}
+.blog-article .article-meta{display:flex;gap:1.2rem;font-size:.82rem;color:var(--muted);margin-bottom:2rem;flex-wrap:wrap;}
+.blog-article .hero-img{width:100%;height:300px;object-fit:cover;border-radius:var(--radius);margin-bottom:2rem;}
+.article-body{font-size:.97rem;line-height:1.85;color:var(--text);}
+.article-body p{margin-bottom:1.2rem;}
+.article-body h2{font-family:var(--font-head);font-size:1.3rem;font-weight:800;margin:2rem 0 .8rem;}
+.article-body h3{font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin:1.5rem 0 .6rem;color:var(--p2);}
+.article-body ul,.article-body ol{padding-left:1.5rem;margin-bottom:1.2rem;}
+.article-body li{margin-bottom:.5rem;}
+.sidebar-card{background:#fff;border:1px solid #e2e8f0;border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem;}
+.sidebar-card h3{font-family:var(--font-head);font-size:.95rem;font-weight:700;margin-bottom:1rem;}
+.sidebar-blog-item{display:flex;gap:.8rem;margin-bottom:1rem;cursor:pointer;padding:.5rem;border-radius:10px;transition:background .2s;}
+.sidebar-blog-item:hover{background:var(--p5);}
+.sidebar-blog-item img{width:60px;height:50px;object-fit:cover;border-radius:8px;flex-shrink:0;}
+.sidebar-blog-item h4{font-size:.8rem;font-weight:600;line-height:1.4;margin-bottom:.2rem;}
+.sidebar-blog-item span{font-size:.72rem;color:var(--muted);}
+.wa-contact-box{background:linear-gradient(135deg,rgba(37,211,102,.1),rgba(37,211,102,.05));border:1px solid rgba(37,211,102,.25);border-radius:var(--radius);padding:1.5rem;text-align:center;}
+.wa-contact-box h3{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:.5rem;}
+.wa-contact-box p{font-size:.83rem;color:var(--muted);margin-bottom:1rem;}
+@media(max-width:768px){.blog-layout{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="../index.html" class="logo">ROB<span>A</span>MO</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html#home">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="../index.html#blog" class="active">Blog</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn-nav" onclick="window.location.href='../index.html'">Login</button>
+    <button class="nav-cta" onclick="window.location.href='../index.html#register'">Enroll Now</button>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="blog-hero">
+  <div class="orb1"></div>
+  <div style="position:relative;z-index:2;max-width:700px;">
+    <div id="blogCat" class="hero-badge" style="display:inline-flex;margin-bottom:1rem;">📝 Blog</div>
+    <h1 id="blogHeroTitle" style="font-family:var(--font-head);font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.15;margin-bottom:1rem;">Loading...</h1>
+    <div style="display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.83rem;color:rgba(255,255,255,.5);">
+      <span id="blogDate">--</span>
+      <span id="blogReadTime">-- min read</span>
+    </div>
+  </div>
+</div>
+
+<div class="blog-layout">
+  <article class="blog-article">
+    <img id="articleImg" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=300&fit=crop" class="hero-img" alt="Blog"/>
+    <h1 id="articleTitle" style="font-size:1.8rem;"></h1>
+    <div class="article-meta">
+      <span id="articleCat"></span>
+      <span id="articleDate"></span>
+      <span id="articleRead"></span>
+    </div>
+    <div class="article-body" id="articleBody">
+      <div style="text-align:center;padding:3rem;"><div class="spinner"></div></div>
+    </div>
+
+    <!-- WhatsApp at end of article -->
+    <div style="margin-top:3rem;background:linear-gradient(135deg,var(--p5),#ede9fe);border-radius:var(--radius);padding:2rem;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:.8rem;">💬</div>
+      <h3 style="font-family:var(--font-head);font-size:1.1rem;font-weight:800;margin-bottom:.5rem;">Is article ke baare mein kuch puchna hai?</h3>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:1.2rem;">ROBAMO ke experts se directly WhatsApp pe baat karo!</p>
+      <a href="https://wa.me/919876543210?text=Hi%20ROBAMO!%20Maine%20aapka%20blog%20padha%20aur%20kuch%20sawaal%20hain." target="_blank" class="wa-btn wa-green" style="display:inline-flex;">💬 WhatsApp pe Pucho</a>
+    </div>
+  </article>
+
+  <aside>
+    <div class="sidebar-card">
+      <h3>🚀 Free Demo Class</h3>
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem;">AI & Robotics seekhna start karo — pehli class bilkul free!</p>
+      <a href="https://wa.me/919876543210?text=Hi%20ROBAMO!%20Mujhe%20free%20demo%20class%20book%20karni%20hai." target="_blank" class="wa-btn wa-green" style="width:100%;justify-content:center;display:flex;">💬 Book Free Demo</a>
+      <button class="btn-primary" style="width:100%;margin-top:.6rem;font-size:.83rem;padding:.7rem;" onclick="window.location.href='courses.html'">View All Courses →</button>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>📰 Recent Posts</h3>
+      <div id="recentPosts"><div class="spinner" style="width:16px;height:16px;border-width:2px;"></div></div>
+    </div>
+
+    <div class="wa-contact-box">
+      <h3>💬 WhatsApp Helpline</h3>
+      <p>Mon–Sat, 9AM–7PM IST. Reply within 2 hours!</p>
+      <a href="https://wa.me/919876543210" target="_blank" class="wa-btn wa-green" style="display:inline-flex;">+91 98765 43210</a>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="../index.html" class="logo">ROB<span>A</span>MO</a><p>India's leading AI & Robotics Education Platform.</p></div>
+    <div class="footer-col"><h5>Programs</h5><a href="courses.html">All Courses</a></div>
+    <div class="footer-col"><h5>Company</h5><a href="../index.html#contact">Contact</a></div>
+    <div class="footer-col"><h5>Quick</h5><a href="../index.html#register">Enroll Now</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 ROBAMO Technologies Pvt. Ltd.</p></div>
+</footer>
+
+<a href="https://wa.me/919876543210" target="_blank" class="float-whatsapp"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<div class="toast" id="globalToast"></div>
+
+<script src="../js/api.js"></script>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').style.background=window.scrollY>60?'rgba(13,1,24,.98)':'rgba(13,1,24,.92)';});
+function toggleMenu(){const l=document.getElementById('navLinks');l.style.display=l.style.display==='flex'?'none':'flex';}
+const blogImgs=['https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=300&fit=crop','https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=300&fit=crop','https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=300&fit=crop','https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=300&fit=crop','https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=300&fit=crop','https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=300&fit=crop','https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&h=300&fit=crop','https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=800&h=300&fit=crop','https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=300&fit=crop','https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=300&fit=crop'];
+const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+async function loadBlog(){
+  const id=new URLSearchParams(window.location.search).get('id');
+  if(!id){document.getElementById('articleBody').innerHTML='<p>Post not found.</p>';return;}
+  try{
+    const data=await Public.getBlogById(id);
+    const p=data.post;
+    const d=new Date(p.created_at);
+    const dateStr=`${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+    document.title=`ROBAMO — ${p.title}`;
+    document.getElementById('blogCat').textContent=`${p.emoji} ${p.category}`;
+    document.getElementById('blogHeroTitle').textContent=p.title;
+    document.getElementById('blogDate').textContent=dateStr;
+    document.getElementById('blogReadTime').textContent=`${p.read_time} min read`;
+    document.getElementById('articleImg').src=blogImgs[(id-1)%blogImgs.length];
+    document.getElementById('articleTitle').textContent=p.title;
+    document.getElementById('articleCat').textContent=p.category;
+    document.getElementById('articleDate').textContent=dateStr;
+    document.getElementById('articleRead').textContent=`${p.read_time} min read`;
+    // Format content
+    const html=(p.content||p.excerpt||'').split('\n').map(line=>{
+      if(!line.trim())return '';
+      if(line.match(/^\d+\./))return `<p><strong>${line}</strong></p>`;
+      if(line.startsWith('•'))return `<p>✅ ${line.slice(1).trim()}</p>`;
+      return `<p>${line}</p>`;
+    }).join('');
+    document.getElementById('articleBody').innerHTML=html;
+  }catch(e){document.getElementById('articleBody').innerHTML='<p>Blog backend se load nahi hua. Please backend start karo.</p>';}
+}
+
+async function loadRecent(){
+  try{
+    const data=await Public.getBlog();
+    const id=parseInt(new URLSearchParams(window.location.search).get('id'));
+    const posts=data.posts.filter(p=>p.id!==id).slice(0,5);
+    document.getElementById('recentPosts').innerHTML=posts.map((p,i)=>`
+      <div class="sidebar-blog-item" onclick="window.location.href='blog-detail.html?id=${p.id}'">
+        <img src="${blogImgs[i%blogImgs.length]}" alt="${p.title}"/>
+        <div><h4>${p.title}</h4><span>${p.category} · ${p.read_time}m</span></div>
+      </div>`).join('');
+  }catch(e){}
+}
+
+document.addEventListener('DOMContentLoaded',()=>{loadBlog();loadRecent();});
+</script>
+</body>
+</html>

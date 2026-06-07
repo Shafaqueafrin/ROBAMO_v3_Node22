@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="India's leading AI & Robotics Education Platform for schools and students. Grade 1-12 programs, hands-on projects, competitions and certified courses."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div class="page-loader" id="pageLoader">
+  <div style="text-align:center;">
+    <div class="loader-ring">
+      <div class="loader-ring-inner"></div>
+      <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-1px;">ROB<span style="color:#F59E0B">A</span>MO</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo">ROB<span>A</span>MO</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#schools">Schools</a></li>
+    <li><a href="#showcase">Showcase</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#About">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn-nav" id="navLogin" onclick="openLoginModal()">Login</button>
+    <div class="nav-user" id="navUser">
+      <div class="nav-user-avatar" id="navUserAvatar">U</div>
+      <span class="nav-user-name" id="navUserName">User</span>
+      <button class="btn-nav" onclick="Auth.logout()">Logout</button>
+    </div>
+    <button class="nav-cta" onclick="openDemoModal()">Book Free Demo</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="home">
+  <div class="hero-bg">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div>
+      <h1 class="hero-h1">Build the <span class="accent">Future</span> with<br><span class="grad">AI & Robotics</span></h1>
+      <p class="hero-sub">Empowering schools, students & parents with hands-on AI & Robotics programs. Grade 1 to Grade 12 — learn, build, and innovate.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Explore Courses →</button>
+        <button class="btn-outline" style="color:#fff;border-color:rgba(255,255,255,.3);" onclick="openDemoModal()">Book Free Demo</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Schools</span></div>
+        <div class="stat"><span class="stat-num">50K+</span><span class="stat-label">Students</span></div>
+        <div class="stat"><span class="stat-num">200+</span><span class="stat-label">Projects</span></div>
+        <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Awards</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <!-- Animated ring -->
+      <div class="hero-ring-wrap">
+    <div class="rotating-ring ring-outer"></div>
+    <div class="rotating-ring ring-mid"></div>
+    <div class="rotating-ring ring-inner"></div>
+
+    <div class="robamo-orbit">
+        <span style="--i:1">R</span>
+        <span style="--i:2">O</span>
+        <span style="--i:3">B</span>
+        <span style="--i:4">A</span>
+        <span style="--i:5">M</span>
+        <span style="--i:6">O</span>
+    </div>
+
+    <div class="robamo-center">
+        ROBAMO
+    </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<section id="features">
+  <div class="text-center reveal">
+    <div class="section-label">Why ROBAMO</div>
+    <h2 class="section-title">Everything You Need to Excel in AI & Robotics</h2>
+    <p class="section-sub">A complete ecosystem for students, schools & parents — making cutting-edge tech education accessible to all.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card reveal">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=60&h=60&fit=crop&crop=center" class="feat-img" alt="Curriculum"/>
+      <div class="feat-icon">🎓</div>
+      <div class="feat-title">Grade-wise Curriculum</div>
+      <p class="feat-desc">Structured programs from Grade 1 to 12, calibrated for each age group's learning capacity.</p>
+    </div>
+    <div class="feat-card reveal">
+      <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=60&h=60&fit=crop&crop=center" class="feat-img" alt="School"/>
+      <div class="feat-icon">🏫</div>
+      <div class="feat-title">School Partnerships</div>
+      <p class="feat-desc">Seamless integration with school systems. Book demos and launch programs within weeks.</p>
+    </div>
+    <div class="feat-card reveal">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=60&h=60&fit=crop&crop=center" class="feat-img" alt="Mentorship"/>
+      <div class="feat-icon">🤝</div>
+      <div class="feat-title">Live Mentorship</div>
+      <p class="feat-desc">IIT/NIT alumni guide students through real-world AI and robotics challenges every week.</p>
+    </div>
+    <div class="feat-card reveal">
+      <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=60&h=60&fit=crop&crop=center" class="feat-img" alt="Competition"/>
+      <div class="feat-icon">🏆</div>
+      <div class="feat-title">Competitions & Showcases</div>
+      <p class="feat-desc">Regular hackathons, robotics olympiads, and national-level project showcases.</p>
+    </div>
+    <div class="feat-card reveal">
+      <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=60&h=60&fit=crop&crop=center" class="feat-img" alt="Certificate"/>
+      <div class="feat-icon">📜</div>
+      <div class="feat-title">Certified Credentials</div>
+      <p class="feat-desc">Industry-recognized certificates on course completion, verified and shareable.</p>
+    </div>
+    <div class="feat-card reveal">
+      <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=60&h=60&fit=crop&crop=center" class="feat-img" alt="Mobile"/>
+      <div class="feat-icon">📱</div>
+      <div class="feat-title">Mobile-First Learning</div>
+      <p class="feat-desc">Learn on any device, anytime. Works smoothly on phone, tablet and desktop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COURSES ══ -->
+<section id="courses">
+  <div class="reveal">
+    <div class="section-label">Curriculum</div>
+    <h2 class="section-title">Courses & Programs</h2>
+    <p class="section-sub">Grade-wise AI & Robotics programs designed by industry experts and certified educators.</p>
+  </div>
+  <div class="grade-tabs">
+    <button class="tab active" onclick="filterCourses('all',this)">All Courses</button>
+    <button class="tab" onclick="filterCourses('Grade 1-5',this)">Grade 1-5 (Junior)</button>
+    <button class="tab" onclick="filterCourses('Grade 6-8',this)">Grade 6-8 (Middle)</button>
+    <button class="tab" onclick="filterCourses('Grade 9-12',this)">Grade 9-12 (Senior)</button>
+    <button class="tab" onclick="filterCourses('Advanced',this)">Advanced</button>
+  </div>
+  <div class="courses-grid" id="coursesGrid">
+    <div class="courses-loading"><div class="spinner"></div><p style="margin-top:.8rem;">Loading courses...</p></div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="howitworks" style="background:var(--p5);">
+  <div class="text-center reveal">
+    <div class="section-label">Simple Process</div>
+    <h2 class="section-title">Kaise Shuru Karein?</h2>
+    <p class="section-sub">4 easy steps mein apna AI & Robotics journey start karo.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-num">01</div>
+      <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=200&h=120&fit=crop&crop=center" class="step-img" alt="Book Demo"/>
+      <div class="step-icon">📞</div>
+      <h3 class="step-title">Free Demo Book Karo</h3>
+      <p class="step-desc">WhatsApp ya form se free demo class book karo. Koi commitment nahi.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">02</div>
+      <img src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=200&h=120&fit=crop&crop=center" class="step-img" alt="Choose Course"/>
+      <div class="step-icon">📚</div>
+      <h3 class="step-title">Course Choose Karo</h3>
+      <p class="step-desc">Grade aur interest ke hisaab se apna course select karo. Expert guidance available hai.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">03</div>
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=200&h=120&fit=crop&crop=center" class="step-img" alt="Learn & Build"/>
+      <div class="step-icon">🔧</div>
+      <h3 class="step-title">Seekho aur Banao</h3>
+      <p class="step-desc">Live classes, hands-on projects aur expert mentorship ke saath real skills develop karo.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">04</div>
+      <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=200&h=120&fit=crop&crop=center" class="step-img" alt="Win Certificate"/>
+      <div class="step-icon">🏆</div>
+      <h3 class="step-title">Jito aur Grow Karo</h3>
+      <p class="step-desc">Certificate pao, competitions mein participate karo aur apna future build karo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCHOOL PARTNERSHIP ══ -->
+<section id="schools" class="dark-section">
+  <div class="text-center reveal">
+    <div class="section-label light">For Schools</div>
+    <h2 class="section-title light">Partner with ROBAMO</h2>
+    <p class="section-sub light">Bring world-class AI & Robotics education to your school. We handle curriculum, kits, training & support.</p>
+  </div>
+  <div class="partner-grid">
+    <div class="reveal">
+      <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=300&fit=crop&crop=center" alt="School Partnership" style="width:100%;border-radius:16px;margin-bottom:2rem;opacity:.85;"/>
+      <h3 style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:1.5rem;line-height:1.2;">Why Schools Choose ROBAMO?</h3>
+      <div class="benefit-item"><div class="benefit-icon">📦</div><div class="benefit-text"><strong>Complete Kit Delivery</strong><span>All hardware kits & learning materials delivered to your school door.</span></div></div>
+      <div class="benefit-item"><div class="benefit-icon">👨‍🏫</div><div class="benefit-text"><strong>Teacher Training</strong><span>Free teacher certification program and ongoing support from our educators.</span></div></div>
+      <div class="benefit-item"><div class="benefit-icon">📊</div><div class="benefit-text"><strong>Progress Dashboard</strong><span>Real-time analytics for school heads to track student performance.</span></div></div>
+      <div class="benefit-item"><div class="benefit-icon">🏅</div><div class="benefit-text"><strong>National Competitions</strong><span>Exclusive access to ROBAMO Olympiad and national robotics championships.</span></div></div>
+      <div class="benefit-item"><div class="benefit-icon">💰</div><div class="benefit-text"><strong>Flexible Pricing</strong><span>Customized pricing for government, private, and international schools.</span></div></div>
+      <a class="whatsapp-btn" href="https://wa.me/919876543210?text=Hi%20ROBAMO!%20I%20am%20interested%20in%20a%20school%20partnership.%20Please%20share%20more%20details." target="_blank">💬 WhatsApp pe Demo Book Karo</a>
+    </div>
+    <div class="form-wrap reveal">
+      <div class="form-title">📋 Book a School Demo</div>
+      <form id="partnershipForm" onsubmit="handlePartnership(event)">
+        <div class="form-group"><label>School Name *</label><input type="text" name="school_name" placeholder="e.g. Delhi Public School" required/></div>
+        <div class="form-group"><label>Principal / Contact Name *</label><input type="text" name="contact_name" placeholder="Your full name" required/></div>
+        <div class="form-group"><label>Phone Number *</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required/></div>
+        <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="school@email.com"/></div>
+        <div class="form-group"><label>City *</label><input type="text" name="city" placeholder="City name" required/></div>
+        <div class="form-group"><label>Number of Students</label>
+          <select name="student_count"><option value="">Select range</option><option>Below 200</option><option>200 - 500</option><option>500 - 1000</option><option>Above 1000</option></select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your school and requirements..."></textarea></div>
+        <button type="submit" class="btn-accent" style="width:100%;" id="partnerBtn">Submit Partnership Request 🚀</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SHOWCASE ══ -->
+<section id="showcase">
+  <div class="text-center reveal">
+    <div class="section-label">Student Work</div>
+    <h2 class="section-title">Project Showcase</h2>
+    <p class="section-sub">Incredible projects built by ROBAMO students — from AI-powered robots to real-world automation.</p>
+  </div>
+  <div class="showcase-grid" id="showcaseGrid">
+    <div class="courses-loading"><div class="spinner"></div></div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section id="testimonials" style="background:var(--p5);">
+  <div class="text-center reveal">
+    <div class="section-label">What People Say</div>
+    <h2 class="section-title">Loved by Schools, Parents & Students</h2>
+  </div>
+  <div class="testi-grid" id="testiGrid">
+    <div class="courses-loading"><div class="spinner"></div></div>
+  </div>
+</section>
+
+<!-- ══ REGISTRATION ══ -->
+<section id="register" class="dark-section">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="text-center reveal" style="margin-bottom:3rem;">
+      <div class="section-label light">Enroll Today</div>
+      <h2 class="section-title light">Student Registration</h2>
+      <p class="section-sub light" style="margin:0 auto;">Register today and get a free demo class + starter kit worth ₹999.</p>
+    </div>
+    <div class="form-wrap reveal">
+      <div class="form-title">📝 Student Enrollment Form</div>
+      <form id="registrationForm" onsubmit="handleRegistration(event)">
+        <div class="form-grid">
+          <div class="form-group"><label>Student Name *</label><input type="text" name="student_name" placeholder="Full name" required/></div>
+          <div class="form-group"><label>Age *</label><input type="number" name="age" placeholder="e.g. 12" min="5" max="18" required/></div>
+          <div class="form-group"><label>Grade *</label>
+            <select name="grade" required>
+              <option value="">Select Grade</option>
+              <option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option>
+              <option>Grade 6</option><option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
+              <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Course Interest</label>
+            <select name="course_name" id="regCourseSelect"><option value="">Select Course</option></select>
+          </div>
+          <div class="form-group"><label>Parent Name *</label><input type="text" name="parent_name" placeholder="Parent / Guardian name" required/></div>
+          <div class="form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required/></div>
+          <div class="form-group form-full"><label>Email *</label><input type="email" name="email" placeholder="your@email.com" required/></div>
+          <div class="form-group form-full"><label>School Name</label><input type="text" name="school_name" placeholder="Your school (optional)"/></div>
+          <div class="form-group form-full"><label>City *</label><input type="text" name="city" placeholder="Your city" required/></div>
+        </div>
+        <button type="submit" class="btn-accent" style="width:100%;margin-top:1rem;" id="regBtn">Complete Registration 🎓</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DOWNLOADS ══ -->
+<section id="downloads">
+  <div class="text-center reveal">
+    <div class="section-label">Resources</div>
+    <h2 class="section-title">Free Downloads</h2>
+    <p class="section-sub">Brochures, curriculum guides & sample project files — all free.</p>
+  </div>
+  <div class="dl-grid" id="downloadsGrid">
+    <div class="courses-loading"><div class="spinner"></div></div>
+  </div>
+</section>
+
+<!-- ══ BLOG ══ -->
+<section id="blog" style="background:var(--p5);">
+  <div class="text-center reveal">
+    <div class="section-label">Knowledge Hub</div>
+    <h2 class="section-title">AI & Robotics Blog</h2>
+    <p class="section-sub">Latest insights in AI, robotics & STEM education from our expert educators.</p>
+  </div>
+  <div class="blog-grid" id="blogGrid">
+    <div class="courses-loading"><div class="spinner"></div></div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact" class="dark-section">
+  <div class="text-center reveal">
+    <div class="section-label light">Get in Touch</div>
+    <h2 class="section-title light">Contact & Support</h2>
+    <p class="section-sub light" style="margin:0 auto;">Have questions? Our team responds within 2 hours.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <h3 style="font-family:var(--font-head);font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:1rem;">Let's Connect</h3>
+      <p style="color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.7;margin-bottom:1.5rem;">Whether you're a school, parent, or student — we'd love to hear from you.</p>
+      <div class="contact-item"><div class="contact-icon">📍</div><div><strong>Our Office</strong><span>Sector 44, Gurugram, Haryana 122003</span></div></div>
+      <div class="contact-item"><div class="contact-icon">📞</div><div><strong>Phone</strong><span>+91 98765 43210</span></div></div>
+      <div class="contact-item"><div class="contact-icon">✉️</div><div><strong>Email</strong><span>hello@robamo.in</span></div></div>
+      <div class="contact-item"><div class="contact-icon">🕐</div><div><strong>Hours</strong><span>Mon–Sat, 9 AM – 7 PM IST</span></div></div>
+
+      <!-- WhatsApp Connect -->
+      <div class="whatsapp-section">
+        <h4>💬 WhatsApp pe Seedha Baat Karo</h4>
+        <p>Koi bhi sawaal ho — instantly reply milti hai!</p>
+        <div class="wa-btns">
+          <a href="https://wa.me/919876543210?text=Hi%20ROBAMO!%20Mujhe%20courses%20ke%20baare%20mein%20jaanna%20hai." target="_blank" class="wa-btn wa-green">
+            <span>📞</span> General Enquiry
+          </a>
+          <a href="https://wa.me/919876543210?text=Hi%20ROBAMO!%20Mujhe%20free%20demo%20class%20book%20karni%20hai." target="_blank" class="wa-btn wa-green">
+            <span>🎓</span> Book Free Demo
+          </a>
+          <a href="https://wa.me/919876543210?text=Hi%20ROBAMO!%20Hamari%20school%20ko%20AI%20Lab%20setup%20karni%20hai." target="_blank" class="wa-btn wa-green">
+            <span>🏫</span> School Partnership
+          </a>
+        </div>
+      </div>
+
+      <div class="map-placeholder">
+        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&h=180&fit=crop&crop=center" alt="Gurugram Office" style="width:100%;border-radius:12px;opacity:.7;"/>
+        <span style="display:block;margin-top:.5rem;font-size:.8rem;color:rgba(255,255,255,.4);">📍 Sector 44, Gurugram, Haryana</span>
+      </div>
+    </div>
+    <div class="form-wrap reveal">
+      <div class="form-title">Send us a Message</div>
+      <form id="contactForm" onsubmit="handleContact(event)">
+        <div class="form-group"><label>Your Name *</label><input type="text" name="name" placeholder="Full name" required/></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="your@email.com" required/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX"/></div>
+        <div class="form-group"><label>I am a...</label>
+          <select name="user_type"><option value="school">School / Principal</option><option value="parent">Parent</option><option value="student">Student</option><option value="other">Other</option></select>
+        </div>
+        <div class="form-group"><label>Message *</label><textarea name="message" placeholder="How can we help you?" required></textarea></div>
+        <button type="submit" class="btn-accent" style="width:100%;" id="contactBtn">Send Message 📨</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">ROB<span>A</span>MO</a>
+      <p>India's leading AI & Robotics education platform — empowering the next generation of innovators, one robot at a time.</p>
+      <div class="social-links" style="margin-top:1rem;">
+        <a class="social-link" href="#" title="Facebook">📘</a>
+        <a class="social-link" href="#" title="Instagram">📸</a>
+        <a class="social-link" href="#" title="YouTube">▶️</a>
+        <a class="social-link" href="#" title="Twitter">🐦</a>
+        <a class="social-link" href="#" title="LinkedIn">💼</a>
+        <a class="social-link" href="https://wa.me/919876543210" target="_blank" title="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Programs</h5><a href="#courses">Grade 1-5 (Junior)</a><a href="#courses">Grade 6-8 (Middle)</a><a href="#courses">Grade 9-12 (Senior)</a><a href="#courses">Advanced ML</a><a href="#courses">Teacher Training</a></div>
+    <div class="footer-col"><h5>Company</h5><a href="#">About ROBAMO</a><a href="#schools">School Partnerships</a><a href="#showcase">Student Showcase</a><a href="#blog">Blog</a><a href="#contact">Contact Us</a></div>
+    <div class="footer-col"><h5>Quick Links</h5><a href="#downloads">Brochures</a><a href="#downloads">Curriculum PDF</a><a href="pages/admin.html">Admin Login</a><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 ROBAMO Technologies Pvt. Ltd. All rights reserved. Made with 💜 in India.</p>
+    <p>hello@robamo.in · +91 98765 43210</p>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/919876543210?text=Hi%20ROBAMO!%20I%20want%20to%20know%20more%20about%20your%20courses." target="_blank" class="float-whatsapp" title="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ══ DEMO MODAL ══ -->
+<div class="modal-overlay" id="demoModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeDemoModal()">✕</button>
+    <h3>🎓 Book a Free Demo</h3>
+    <p>Experience ROBAMO firsthand. No commitment needed.</p>
+    <form id="demoForm" onsubmit="handleDemo(event)">
+      <div class="form-group"><label>Your Name *</label><input type="text" name="name" placeholder="Full name" required/></div>
+      <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required/></div>
+      <div class="form-group"><label>City</label><input type="text" name="city" placeholder="Your city"/></div>
+      <div class="form-group"><label>I'm a...</label>
+        <select name="user_type"><option value="parent">Parent</option><option value="school">School / Principal</option><option value="student">Student</option></select>
+      </div>
+      <button type="submit" class="btn-accent" style="width:100%;" id="demoBtn">Book My Free Demo 🚀</button>
+    </form>
+    <div style="margin-top:1rem;text-align:center;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1);">
+      <p style="color:rgba(255,255,255,.4);font-size:.8rem;margin-bottom:.6rem;">Ya seedha WhatsApp pe contact karo</p>
+      <a href="https://wa.me/919876543210?text=Hi%20ROBAMO!%20Mujhe%20free%20demo%20book%20karni%20hai." target="_blank" class="wa-btn wa-green" style="display:inline-flex;">💬 WhatsApp pe Book Karo</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOGIN MODAL ══ -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLoginModal()">✕</button>
+    <h3>👤 Login to ROBAMO</h3>
+    <p>Access your dashboard and enrolled courses.</p>
+    <div style="display:flex;gap:.5rem;margin-bottom:1.5rem;">
+      <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">Login</button>
+      <button class="tab" id="tabRegister" onclick="switchAuthTab('register')">Register</button>
+    </div>
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="your@email.com" required/></div>
+      <div class="form-group"><label>Password *</label><input type="password" name="password" placeholder="Your password" required/></div>
+      <button type="submit" class="btn-accent" style="width:100%;" id="loginBtn">Login →</button>
+    </form>
+    <form id="quickRegForm" onsubmit="handleQuickReg(event)" style="display:none;">
+      <div class="form-group"><label>Full Name *</label><input type="text" name="name" placeholder="Your name" required/></div>
+      <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="your@email.com" required/></div>
+      <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX"/></div>
+      <div class="form-group"><label>Password *</label><input type="password" name="password" placeholder="Min 6 characters" required minlength="6"/></div>
+      <button type="submit" class="btn-accent" style="width:100%;" id="quickRegBtn">Create Account →</button>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="globalToast"></div>
+
+<script src="js/api.js"></script>
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('pageLoader').classList.add('hidden');},800);});
+
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+window.addEventListener('scroll',()=>{document.getElementById('navbar').style.background=window.scrollY>60?'rgba(13,1,24,0.98)':'rgba(13,1,24,0.92)';});
+
+function toggleMenu(){
+  const links=document.getElementById('navLinks');
+  links.style.display=links.style.display==='flex'?'none':'flex';
+  if(links.style.display==='flex'){
+    links.style.cssText='display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(13,1,24,.98);padding:1.5rem 5%;gap:1.2rem;border-bottom:1px solid rgba(139,92,246,.15);z-index:999;';
+    links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.style.display='none';}));
+  }
+}
+
+function openDemoModal(){document.getElementById('demoModal').classList.add('active');}
+function closeDemoModal(){document.getElementById('demoModal').classList.remove('active');}
+function openLoginModal(){document.getElementById('loginModal').classList.add('active');}
+function closeLoginModal(){document.getElementById('loginModal').classList.remove('active');}
+document.getElementById('demoModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeDemoModal();});
+document.getElementById('loginModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLoginModal();});
+
+function switchAuthTab(tab){
+  document.getElementById('loginForm').style.display=tab==='login'?'':'none';
+  document.getElementById('quickRegForm').style.display=tab==='register'?'':'none';
+  document.getElementById('tabLogin').classList.toggle('active',tab==='login');
+  document.getElementById('tabRegister').classList.toggle('active',tab==='register');
+}
+
+// Course images map
+const courseImages={
+  'Grade 1-5':'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=180&fit=crop&crop=center',
+  'Grade 6-8':'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=180&fit=crop&crop=center',
+  'Grade 9-12':'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=180&fit=crop&crop=center',
+  'Advanced':'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=180&fit=crop&crop=center',
+};
+
+let allCourses=[];
+async function loadCourses(){
+  try{
+    const data=await Courses.getAll();
+    allCourses=data.courses;
+    renderCourses(allCourses);
+    const sel=document.getElementById('regCourseSelect');
+    allCourses.forEach(c=>{const opt=document.createElement('option');opt.value=c.title;opt.textContent=`${c.title} (${c.grade_level})`;sel.appendChild(opt);});
+  }catch(e){
+    document.getElementById('coursesGrid').innerHTML='<p style="color:var(--muted);padding:2rem;">Backend se connect nahi hua. Please backend start karo: <code>cd backend && npm run dev</code></p>';
+  }
+}
+
+function renderCourses(courses){
+  const grid=document.getElementById('coursesGrid');
+  if(!courses.length){grid.innerHTML='<p style="color:var(--muted)">No courses found.</p>';return;}
+  grid.innerHTML=courses.map(c=>`
+    <div class="course-card reveal">
+      <div class="course-thumb-img">
+        <img src="${courseImages[c.grade_level]||courseImages['Grade 6-8']}" alt="${c.title}" loading="lazy"/>
+        <div class="course-thumb-overlay ${c.color_class}">${c.emoji}</div>
+      </div>
+      <div class="course-body">
+        <span class="course-tag">${c.grade_level}</span>
+        <h3 class="course-title">${c.title}</h3>
+        <p style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem;line-height:1.5;">${c.description||''}</p>
+        <div class="course-meta">
+          <span>⏱ ${c.duration_hours}h</span>
+          <span>🎯 ${c.difficulty}</span>
+          <span>📚 ${c.modules} Modules</span>
+        </div>
+        <div style="display:flex;gap:.5rem;">
+          <button class="enroll-btn" style="flex:1;" onclick="window.location.href='pages/course-detail.html?id=${c.id}'">Details →</button>
+          <button class="enroll-btn" style="flex:1;background:linear-gradient(135deg,#F59E0B,#FCD34D);color:#1C1C2E;" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Enroll →</button>
+        </div>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('.course-card.reveal').forEach(el=>observer.observe(el));
+}
+
+function filterCourses(grade,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderCourses(grade==='all'?allCourses:allCourses.filter(c=>c.grade_level===grade));
+}
+
+// Showcase images
+const showcaseImgs=['https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&h=200&fit=crop','https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=300&h=200&fit=crop','https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=300&h=200&fit=crop','https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=300&h=200&fit=crop','https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&h=200&fit=crop','https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=300&h=200&fit=crop'];
+
+async function loadShowcase(){
+  try{
+    const data=await Public.getShowcase();
+    document.getElementById('showcaseGrid').innerHTML=data.projects.map((p,i)=>`
+      <div class="showcase-card reveal">
+        <div class="showcase-img-wrap">
+          <img src="${showcaseImgs[i%showcaseImgs.length]}" alt="${p.title}" loading="lazy"/>
+          <div class="showcase-emoji">${p.emoji}</div>
+        </div>
+        <div class="showcase-info">
+          <h4>${p.title}</h4>
+          <p>${p.student_name}, ${p.city}</p>
+          <p style="font-size:.8rem;color:var(--muted);margin-top:.3rem;">${p.description||''}</p>
+          <span class="badge">${p.category}</span>
+        </div>
+      </div>`).join('');
+    document.querySelectorAll('.showcase-card.reveal').forEach(el=>observer.observe(el));
+  }catch(e){console.error(e);}
+}
+
+async function loadTestimonials(){
+  try{
+    const data=await Public.getTestimonials();
+    document.getElementById('testiGrid').innerHTML=data.testimonials.map(t=>`
+      <div class="testi-card reveal">
+        <div class="testi-stars">${'★'.repeat(t.rating)}</div>
+        <p class="testi-text">"${t.content}"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">${t.avatar_letter||t.name[0]}</div>
+          <div><div class="testi-name">${t.name}</div><div class="testi-role">${t.role}</div></div>
+        </div>
+      </div>`).join('');
+    document.querySelectorAll('.testi-card.reveal').forEach(el=>observer.observe(el));
+  }catch(e){console.error(e);}
+}
+
+// Blog images
+const blogImgs=['https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&h=200&fit=crop','https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop','https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=200&fit=crop','https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop','https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=200&fit=crop','https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'];
+
+async function loadBlog(){
+  try{
+    const data=await Public.getBlog();
+    const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    document.getElementById('blogGrid').innerHTML=data.posts.slice(0,6).map((p,i)=>{
+      const d=new Date(p.created_at);
+      return `<div class="blog-card reveal" onclick="window.location.href='pages/blog-detail.html?id=${p.id}'" style="cursor:pointer;">
+        <div class="blog-img-wrap">
+          <img src="${blogImgs[i%blogImgs.length]}" alt="${p.title}" loading="lazy"/>
+          <div class="blog-emoji">${p.emoji}</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-cat">${p.category}</div>
+          <h4>${p.title}</h4>
+          <p>${p.excerpt}</p>
+          <div class="blog-footer-meta"><span>${months[d.getMonth()]} ${d.getFullYear()}</span><span>${p.read_time} min read</span></div>
+        </div>
+      </div>`;
+    }).join('');
+    document.querySelectorAll('.blog-card.reveal').forEach(el=>observer.observe(el));
+  }catch(e){console.error(e);}
+}
+
+async function loadDownloads(){
+  try{
+    const data=await Public.getDownloads();
+    document.getElementById('downloadsGrid').innerHTML=data.downloads.map(d=>`
+      <div class="dl-card reveal">
+        <div class="dl-icon">${d.emoji}</div>
+        <div class="dl-title">${d.title}</div>
+        <p class="dl-desc">${d.description}</p>
+        <button class="btn-primary" onclick="trackAndDownload(${d.id})">Download Free ↓</button>
+      </div>`).join('');
+    document.querySelectorAll('.dl-card.reveal').forEach(el=>observer.observe(el));
+  }catch(e){console.error(e);}
+}
+
+async function trackAndDownload(id){
+  await Public.trackDownload(id).catch(()=>{});
+  showToast('PDF download shuru ho gayi! 📥');
+}
+
+async function handleDemo(e){
+  e.preventDefault();const btn=document.getElementById('demoBtn');showLoader(btn);
+  try{const res=await Forms.bookDemo(getFormData(e.target));showToast(res.message);e.target.reset();closeDemoModal();}
+  catch(err){showToast(err.message,'error');}hideLoader(btn);
+}
+async function handlePartnership(e){
+  e.preventDefault();const btn=document.getElementById('partnerBtn');showLoader(btn);
+  try{const res=await Forms.partnership(getFormData(e.target));showToast(res.message);e.target.reset();}
+  catch(err){showToast(err.message,'error');}hideLoader(btn);
+}
+async function handleRegistration(e){
+  e.preventDefault();const btn=document.getElementById('regBtn');showLoader(btn);
+  try{const res=await Forms.register(getFormData(e.target));showToast(res.message);e.target.reset();}
+  catch(err){showToast(err.message,'error');}hideLoader(btn);
+}
+async function handleContact(e){
+  e.preventDefault();const btn=document.getElementById('contactBtn');showLoader(btn);
+  try{const res=await Forms.contact(getFormData(e.target));showToast(res.message);e.target.reset();}
+  catch(err){showToast(err.message,'error');}hideLoader(btn);
+}
+async function handleLogin(e){
+  e.preventDefault();const btn=document.getElementById('loginBtn');showLoader(btn);
+  try{const d=getFormData(e.target);const res=await Auth.login(d.email,d.password);setToken(res.token);setUser(res.user);showToast('Welcome back, '+res.user.name+'! 👋');closeLoginModal();updateNav();}
+  catch(err){showToast(err.message,'error');}hideLoader(btn);
+}
+async function handleQuickReg(e){
+  e.preventDefault();const btn=document.getElementById('quickRegBtn');showLoader(btn);
+  try{const res=await Auth.register(getFormData(e.target));setToken(res.token);setUser(res.user);showToast('Account created! Welcome to ROBAMO! 🎉');closeLoginModal();updateNav();}
+  catch(err){showToast(err.message,'error');}hideLoader(btn);
+}
+
+function updateNav(){
+  const user=getUser();
+  if(user){
+    document.getElementById('navLogin').style.display='none';
+    document.getElementById('navUser').style.display='flex';
+    document.getElementById('navUserName').textContent=user.name.split(' ')[0];
+    document.getElementById('navUserAvatar').textContent=user.name[0].toUpperCase();
+  }else{
+    document.getElementById('navLogin').style.display='';
+    document.getElementById('navUser').style.display='none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  loadCourses();loadShowcase();loadTestimonials();loadBlog();loadDownloads();updateNav();
+});
+</script>
+</body>
+</html>
