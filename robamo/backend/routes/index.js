@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 const { authMiddleware, adminMiddleware } = require('../middleware/auth');
 
 const { adminLogin, userRegister, userLogin, getProfile } = require('../controllers/authController');
@@ -52,5 +53,20 @@ router.post('/admin/testimonials', adminMiddleware, addTestimonial);
 
 // HEALTH
 router.get('/health', (req, res) => res.json({ success: true, message: 'ROBAMO API running 🚀', timestamp: new Date().toISOString() }));
+// Google OAuth routes
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
+router.get('/auth/google/callback',
+  passport.authenticate('google', { session: false, failureRedirect: '/?error=google_failed' }),
+  (req, res) => {
+    const { user, token } = req.user;
+    const userData = encodeURIComponent(JSON.stringify({
+      id: user.id, name: user.name, email: user.email, role: user.role
+    }));
+    const frontendURL = process.env.FRONTEND_URL || 'http://localhost:5000';
+    res.redirect(`${frontendURL}/?token=${token}&user=${userData}`);
+  }
+);
 module.exports = router;

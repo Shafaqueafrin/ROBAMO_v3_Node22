@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const session = require('express-session');
+const passport = require('./config/passport');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,7 +28,15 @@ const allowedOrigins = [
   'https://robamo-v3-node22.vercel.app',
   'https://robamo-v3-node22-ovp2vgqcb-shafaqueafrins-projects.vercel.app',
 ];
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(cors({ origin: allowedOrigins, credentials: true }))
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'robamo_session_secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: process.env.NODE_ENV === 'production' }
+}));
+app.use(passport.initialize());
+app.use(passport.session());;
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
