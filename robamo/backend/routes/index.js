@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const { authMiddleware, adminMiddleware } = require('../middleware/auth');
 
-const { adminLogin, userRegister, userLogin, getProfile } = require('../controllers/authController');
+const { adminLogin, userRegister, userLogin, getProfile, schoolRegister, schoolLogin } = require('../controllers/authController');
 const { getAllCourses, getCourseById, getCourseModules, createCourse, updateCourse, deleteCourse, addModule, addLesson } = require('../controllers/courseController');
 const { submitRegistration, getAllRegistrations, updateRegistrationStatus, bookDemo, getAllDemoBookings, submitPartnership, getAllPartnerships, submitContact, getAllMessages } = require('../controllers/formController');
 const { getShowcase, getTestimonials, getBlogPosts, getBlogById, getDownloads, trackDownload, getAdminStats, addShowcaseProject, createBlogPost, addTestimonial } = require('../controllers/publicController');
@@ -13,6 +13,54 @@ router.post('/auth/admin/login', adminLogin);
 router.post('/auth/register', userRegister);
 router.post('/auth/login', userLogin);
 router.get('/auth/profile', authMiddleware, getProfile);
+router.post('/auth/school/register', schoolRegister);
+router.post('/auth/school/login', schoolLogin);
+
+// SCHOOL MIDDLEWARE
+const schoolMiddleware = (req, res, next) => {
+  authMiddleware(req, res, () => {
+    if (req.user.role !== 'school') {
+      return res.status(403).json({ success: false, message: 'School access required.' });
+    }
+    next();
+  });
+};
+
+// SCHOOL PANEL ROUTES
+router.get('/school/students', schoolMiddleware, (req, res) => {
+  const db = require('../config/database');
+  const school = db.prepare('SELECT * FROM schools WHERE id = ?').get(req.user.id);
+  const students = db.prepare(`
+    SELECT r.id, r.student_name, r.email, r.phone, r.grade, r.course_name, r.status, r.created_at
+    FROM registrations r
+    WHERE LOWER(r.school_name) = LOWER(?)
+    ORDER BY r.created_at DESC
+  `).all(school.name);
+  res.json({ success: true, students, school: { name: school.name, city: school.city } });
+});
+
+router.get('/school/demos', schoolMiddleware, (req, res) => {
+  const db = require('../config/database');
+  const school = db.prepare('SELECT * FROM schools WHERE id = ?').get(req.user.id);
+  const demos = db.prepare(`
+    SELECT * FROM demo_bookings WHERE LOWER(school_name) = LOWER(?) ORDER BY created_at DESC
+  `).all(school.name);
+  res.json({ success: true, demos });
+});
+
+// ADMIN SCHOOL MANAGEMENT
+router.get('/admin/schools', adminMiddleware, (req, res) => {
+  const db = require('../config/database');
+  const schools = db.prepare('SELECT id, name, email, city, phone, is_approved, created_at FROM schools ORDER BY created_at DESC').all();
+  res.json({ success: true, schools });
+});
+
+router.put('/admin/schools/:id', adminMiddleware, (req, res) => {
+  const db = require('../config/database');
+  const { is_approved } = req.body;
+  db.prepare('UPDATE schools SET is_approved = ? WHERE id = ?').run(is_approved ? 1 : 0, req.params.id);
+  res.json({ success: true, message: is_approved ? 'School approved!' : 'School rejected.' });
+});
 
 // COURSES (public)
 router.get('/courses', getAllCourses);
@@ -74,4 +122,26 @@ router.get('/auth/google/callback',
     res.redirect(`${frontendURL}/?token=${token}&user=${userData}`);
   }
 );
+// CERTIFICATES
+router.post('/admin/certificates', adminMiddleware, (req, res) => {
+  const db = require('../config/database');
+  const { student_name, student_email, course_name, school_name, grade } = req.body;
+  if (!student_name || !course_name) return res.status(400).json({ success: false, message: 'Student name aur course name required.' });
+  const cert_id = 'ROBAMO-' + Date.now() + '-' + Math.random().toString(36).substr(2,5).toUpperCase();
+  db.prepare('INSERT INTO certificates (cert_id, student_name, student_email, course_name, school_name, grade) VALUES (?,?,?,?,?,?)').run(cert_id, student_name, student_email || null, course_name, school_name || null, grade || null);
+  res.json({ success: true, message: 'Certificate issued!', cert_id });
+});
+
+router.get('/admin/certificates', adminMiddleware, (req, res) => {
+  const db = require('../config/database');
+  const certs = db.prepare('SELECT * FROM certificates ORDER BY issued_at DESC').all();
+  res.json({ success: true, certificates: certs });
+});
+
+router.get('/certificate/:cert_id', (req, res) => {
+  const db = require('../config/database');
+  const cert = db.prepare('SELECT * FROM certificates WHERE cert_id = ?').get(req.params.cert_id);
+  if (!cert) return res.status(404).json({ success: false, message: 'Certificate not found.' });
+  res.json({ success: true, certificate: cert });
+});
 module.exports = router;

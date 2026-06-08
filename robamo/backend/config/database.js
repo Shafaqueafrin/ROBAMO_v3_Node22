@@ -29,6 +29,27 @@ function initializeDB() {
       password TEXT NOT NULL,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
+    CREATE TABLE IF NOT EXISTS schools (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      email TEXT UNIQUE NOT NULL,
+      password TEXT NOT NULL,
+      city TEXT,
+      phone TEXT,
+      is_approved INTEGER DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS certificates (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      cert_id TEXT UNIQUE NOT NULL,
+      student_name TEXT NOT NULL,
+      student_email TEXT,
+      course_name TEXT NOT NULL,
+      school_name TEXT,
+      grade TEXT,
+      issued_by TEXT DEFAULT 'ROBAMO',
+      issued_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
     CREATE TABLE IF NOT EXISTS courses (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL,
@@ -221,16 +242,16 @@ function seedData() {
     const modIns = db.prepare('INSERT INTO course_modules (course_id,module_number,title,description,duration_hours) VALUES (?,?,?,?,?)');
     const lesIns = db.prepare('INSERT INTO course_lessons (module_id,course_id,lesson_number,title,lesson_type,duration_minutes,is_free) VALUES (?,?,?,?,?,?,?)');
 
-    const m1 = [
-      [1,1,'Robot ki Duniya mein Welcome!','Robots kya hote hain, unke types aur history',2],
-      [1,2,'Robot ke Parts — Sensors & Actuators','Ultrasonic, IR sensors aur servo motors explore karna',3],
-      [1,3,'Block Coding Basics','Scratch-style programming se robot ko command dena',3],
-      [1,4,'Apna Pehla Circuit Banao','LED, buzzer aur simple circuits ka hands-on project',3],
-      [1,5,'Moving Robot Build — Part 1','Wheels, motors aur chassis assembly',3],
-      [1,6,'Moving Robot Build — Part 2','Programming karo aur robot ko chalao',3],
-      [1,7,'Sensor-Based Reactions','Robot ko obstacles avoid karna sikhao',4],
-      [1,8,'Final Project — Mini Robot Showcase','Apna robot present karo aur certificate pao!',3],
-    ];
+  const m1 = [
+   [1, 1, 'Welcome to the World of Robots!', 'What robots are, their types, and history', 2],
+   [1, 2, 'Robot Parts — Sensors & Actuators', 'Exploring ultrasonic sensors, IR sensors, and servo motors', 3],
+   [1, 3, 'Basics of Block Coding', 'Controlling robots using Scratch-style programming', 3],
+   [1, 4, 'Build Your First Circuit', 'Hands-on project with LED, buzzer, and simple circuits', 3],
+   [1, 5, 'Moving Robot Build — Part 1', 'Assembling wheels, motors, and chassis', 3],
+   [1, 6, 'Moving Robot Build — Part 2', 'Programming and making the robot move', 3],
+   [1, 7, 'Sensor-Based Reactions', 'Teaching the robot to avoid obstacles', 4],
+   [1, 8, 'Final Project — Mini Robot Showcase', 'Present your robot and earn a certificate!', 3],
+  ];
     m1.forEach(m => {
       const mr = modIns.run(...m);
       const mid = mr.lastInsertRowid;
