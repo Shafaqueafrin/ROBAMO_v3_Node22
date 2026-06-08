@@ -241,7 +241,8 @@ async function handleAdminLogin(e) {
   const email = document.getElementById('adminEmail').value;
   const pass = document.getElementById('adminPass').value;
   try {
-    const res = await fetch('http://localhost:5000/api/auth/admin/login', {
+    const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : 'https://robamo-v3-node22-5.onrender.com/api';
+    const res = await fetch(API_BASE + '/auth/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password: pass })
