@@ -141,7 +141,7 @@ section{padding:6rem 5%;}
 
 /* ── FEATURES ── */
 #features{padding:6rem 5%;background:#fff;}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}.feat-card{background:#fff;border:1px solid #e2e8f0;border-radius:var(--radius);padding:1.8rem;transition:transform .2s,box-shadow .2s;overflow:hidden;position:relative;}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;}.feat-card{background:#fff;border:1px solid #e2e8f0;border-radius:var(--radius);padding:1.8rem;transition:transform .2s,box-shadow .2s;overflow:hidden;position:relative;}
 .feat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
 .feat-img{width:100%;height:120px;object-fit:cover;border-radius:10px;margin-bottom:1rem;opacity:.85;}
 .feat-icon{font-size:1.8rem;margin-bottom:.8rem;}
