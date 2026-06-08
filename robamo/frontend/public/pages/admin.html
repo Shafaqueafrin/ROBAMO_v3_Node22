@@ -275,7 +275,15 @@ function showPane(name) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('pane-' + name).classList.add('active');
   event.currentTarget.classList.add('active');
-  const titles = { overview: 'Overconst titles = { overview: 'Overview', registrations: 'Registrations', demos: 'Demo Bookings', partnerships: 'School Partnerships', schools: 'School Accounts', certificates: 'Certificates', messages: 'Contact Messages' };view', registrations: 'Registrations', demos: 'Demo Bookings', partnerships: 'School Partnerships', schools: 'School Accounts', messages: 'Contact Messages' }; titles = { overview: 'Overview', registrations: 'Registrations', demos: 'Demo Bookings', partnerships: 'School Partnerships', messages: 'Contact Messages' };
+  const titles = {
+  overview: 'Overview',
+  registrations: 'Registrations',
+  demos: 'Demo Bookings',
+  partnerships: 'School Partnerships',
+  schools: 'School Accounts',
+  certificates: 'Certificates',
+  messages: 'Contact Messages'
+};
   document.getElementById('paneTitle').textContent = titles[name];
   if (name === 'registrations') loadRegistrations();
   if (name === 'demos') loadDemos();
