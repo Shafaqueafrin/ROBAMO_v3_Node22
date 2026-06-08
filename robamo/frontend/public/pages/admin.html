@@ -101,7 +101,9 @@ tr:hover td{background:#fafbff;}
     <div class="nav-item" onclick="showPane('registrations')"><span class="nav-item-icon">📝</span> Registrations</div>
     <div class="nav-item" onclick="showPane('demos')"><span class="nav-item-icon">🎓</span> Demo Bookings</div>
     <div class="nav-item" onclick="showPane('partnerships')"><span class="nav-item-icon">🏫</span> Partnerships</div>
+    <div class="nav-item" onclick="showPane('schools')"><span class="nav-item-icon">🏛️</span> School Accounts</div>
     <div class="nav-item" onclick="showPane('messages')"><span class="nav-item-icon">✉️</span> Messages</div>
+    <div class="nav-item" onclick="showPane('certificates')"><span class="nav-item-icon">🎓</span> Certificates</div>
   </div>
   <!-- MAIN -->
   <div class="main-content">
@@ -166,7 +168,50 @@ tr:hover td{background:#fafbff;}
         </table></div>
       </div>
     </div>
-
+    <!-- CERTIFICATES -->
+    <div class="pane" id="pane-certificates">
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="card-header"><h2>Issue New Certificate</h2></div>
+        <div style="padding:1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+          <div class="form-group"><label>Student Name *</label><input type="text" id="certStudentName" placeholder="Student ka naam"/></div>
+          <div class="form-group"><label>Student Email</label><input type="email" id="certStudentEmail" placeholder="student@email.com"/></div>
+          <div class="form-group"><label>Course Name *</label><input type="text" id="certCourseName" placeholder="Course naam"/></div>
+          <div class="form-group"><label>School Name</label><input type="text" id="certSchoolName" placeholder="School naam"/></div>
+          <div class="form-group"><label>Grade</label><input type="text" id="certGrade" placeholder="A+ / 95% / Distinction"/></div>
+        </div>
+        <div style="padding:0 1.5rem 1.5rem;">
+          <button onclick="issueCertificate()" style="background:linear-gradient(135deg,#6D28D9,#8B5CF6);color:#fff;border:none;padding:.75rem 2rem;border-radius:50px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:.95rem;">🎓 Issue Certificate</button>
+          <span id="certMsg" style="margin-left:1rem;font-size:.85rem;"></span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2>Issued Certificates</h2>
+          <span id="certCount" style="font-size:.82rem;color:var(--muted)"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Cert ID</th><th>Student</th><th>Course</th><th>School</th><th>Grade</th><th>Date</th><th>Action</th></tr></thead>
+            <tbody id="certTable"><tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--muted)">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- SCHOOL ACCOUNTS -->
+    <div class="pane" id="pane-schools">
+      <div class="card">
+        <div class="card-header">
+          <h2>School Accounts</h2>
+          <span id="schoolCount" style="font-size:.82rem;color:var(--muted)"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>School Name</th><th>Email</th><th>City</th><th>Phone</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+            <tbody id="schoolTable"><tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--muted)">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
     <!-- MESSAGES -->
     <div class="pane" id="pane-messages">
       <div class="card">
@@ -230,11 +275,13 @@ function showPane(name) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('pane-' + name).classList.add('active');
   event.currentTarget.classList.add('active');
-  const titles = { overview: 'Overview', registrations: 'Registrations', demos: 'Demo Bookings', partnerships: 'School Partnerships', messages: 'Contact Messages' };
+  const titles = { overview: 'Overconst titles = { overview: 'Overview', registrations: 'Registrations', demos: 'Demo Bookings', partnerships: 'School Partnerships', schools: 'School Accounts', certificates: 'Certificates', messages: 'Contact Messages' };view', registrations: 'Registrations', demos: 'Demo Bookings', partnerships: 'School Partnerships', schools: 'School Accounts', messages: 'Contact Messages' }; titles = { overview: 'Overview', registrations: 'Registrations', demos: 'Demo Bookings', partnerships: 'School Partnerships', messages: 'Contact Messages' };
   document.getElementById('paneTitle').textContent = titles[name];
   if (name === 'registrations') loadRegistrations();
   if (name === 'demos') loadDemos();
   if (name === 'partnerships') loadPartnerships();
+  if (name === 'schools') loadSchools();
+  if (name === 'certificates') loadCertificates();
   if (name === 'messages') loadMessages();
 }
 
@@ -282,7 +329,37 @@ async function loadDemos() {
     `<tr><td>${i+1}</td><td><strong>${d.name}</strong></td><td>${d.phone}</td><td>${d.city || '—'}</td><td>${d.user_type}</td><td>${pill(d.status)}</td><td>${fmtDate(d.created_at)}</td></tr>`
   ).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted)">No demo bookings yet</td></tr>';
 }
+async function loadSchools() {
+  const data = await adminFetch('/admin/schools');
+  const schools = data.schools || [];
+  document.getElementById('schoolCount').textContent = schools.length + ' total';
+  document.getElementById('schoolTable').innerHTML = schools.map((s, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><strong>${s.name}</strong></td>
+      <td>${s.email}</td>
+      <td>${s.city || '—'}</td>
+      <td>${s.phone || '—'}</td>
+      <td>${s.is_approved ? '<span class="pill confirmed">Approved</span>' : '<span class="pill pending">Pending</span>'}</td>
+      <td>${fmtDate(s.created_at)}</td>
+      <td>
+        ${s.is_approved
+          ? `<button onclick="approveSchool(${s.id},0)" style="background:#fee2e2;color:#991b1b;border:none;padding:.3rem .7rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Reject</button>`
+          : `<button onclick="approveSchool(${s.id},1)" style="background:#d1fae5;color:#065f46;border:none;padding:.3rem .7rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Approve</button>`
+        }
+      </td>
+    </tr>`).join('') || '<tr><td colspan="8" style="text-align:center;color:var(--muted)">No school accounts yet</td></tr>';
+}
 
+async function approveSchool(id, approve) {
+  const token = localStorage.getItem('robamo_admin_token');
+  await fetch('https://robamo-v3-node22-5.onrender.com/api/admin/schools/' + id, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+    body: JSON.stringify({ is_approved: approve })
+  });
+  loadSchools();
+}
 async function loadPartnerships() {
   const data = await adminFetch('/admin/partnerships');
   document.getElementById('partCount').textContent = data.total + ' total';
